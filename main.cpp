@@ -11,6 +11,6 @@
 using namespace std;
 
 int main(){
-	Game game(new Board(8, 8));
+	Game game(new Board());
 	game.Run();
 }
