@@ -23,7 +23,6 @@ private:
 	bool CheckLegal(int, int, char);
 public:
 	Board(int = DEFAULT_SIZE_, int = DEFAULT_SIZE_);
-	Board();
 	Board(const Board&);
 	bool MakeMove(int, int, char);
 	void ShowPossibleMoves(char);
