@@ -5,7 +5,6 @@
  *      Author: ranran9991
  */
 #include "gtest/gtest.h"
-
 #include "boardTest.cpp"
 
 int main(int argc, char* argv[]){
