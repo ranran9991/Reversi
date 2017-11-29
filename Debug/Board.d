@@ -1,3 +1,3 @@
-Board.o: ../Board.cpp ../Board.h
+Board.d: ../Board.cpp ../Board.h
 
 ../Board.h:

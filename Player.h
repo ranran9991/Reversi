@@ -1,16 +1,8 @@
 /*
- * Board.h
+ * Player.h
  *
- *  Name: Ron Edi
- *  ID: 322956897
- *  Exercise Group: 05
- */
-/*
- * Board.h
- *
- *  Name: Ron Edi
- *  ID: 322956897
- *  Exercise Group: 05
+ *  Created on: Nov 25, 2017
+ *      Author: ron
  */
 
 #ifndef PLAYER_H_
@@ -19,17 +11,17 @@
 #include <iostream>
 
 class Player {
-private:
+protected:
 	Board *board;
 	char sign;
 public:
-	Player(char);
+	Player();
+	void SetSign(char);
 	char GetSign();
 	void SetBoard(Board*);
-	bool MakeMove(int, int);
-	void ShowPossibleMoves();
+	virtual void MakeMove()=0;
 	bool PossibleMoveExists();
-	virtual ~Player();
+	~Player();
 };
 
 #endif /* PLAYER_H_ */

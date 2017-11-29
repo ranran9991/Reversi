@@ -9,16 +9,17 @@
 #ifndef GAME_H_
 #define GAME_H_
 #include "Board.h"
-#include "Player.h"
+#include "HumanPlayer.h"
+#include "AIPlayer.h"
 
 class Game {
 private:
 	Board *board;
-	Player black;
-	Player white;
+	Player *black;
+	Player *white;
+	bool AIGame;
 public:
-	Game(Board* board);
-	void Move(Player);
+	Game(Board*, bool = false);
 	void Run();
 	bool End();
 	virtual ~Game();

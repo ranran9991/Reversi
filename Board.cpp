@@ -23,6 +23,32 @@ Board::Board(int height, int width) : height(height), width(width) {
 	board[height/2][width/2 - 1] =  'X';
 }
 
+Board::Board(const Board& b) : height(b.height), width(b.width) {
+	board = new char*[height];
+	for(int i = 0; i < height; i++){
+		board[i] = new char[width];
+		for(int j = 0; j < width; j++)
+			board[i][j] = b.board[i][j];
+	}
+}
+
+Board& Board::operator=(const Board& b) {
+	if (this != &b) {
+		for(int i = 0; i < height; i++)
+			delete[] board[i];
+		delete[] board;
+		height = b.height;
+		width = b.width;
+		board = new char*[height];
+		for(int i = 0; i < height; i++){
+			board[i] = new char[width];
+			for(int j = 0; j < width; j++)
+				board[i][j] = b.board[i][j];
+		}
+	}
+	return *this;
+}
+
 Board::~Board() {
 	// deleting the board
 	for(int i = 0; i < height; i++)
@@ -55,6 +81,11 @@ bool Board::MakeMove(int x, int y, char sign) {
 					MakeMoveDir(x+i, y+j, i, j, sign);
 	board[x][y] = sign; // assigning the char to the given place
 	return true;
+}
+
+char Board::OtherSign(char sign) {
+	if (sign == 'X') return 'O';
+	return 'X';
 }
 
 bool Board::PossibleMoveExists(char sign) {
@@ -122,11 +153,23 @@ int Board::CountSign(char sign) {
 	return count;
 }
 
-vector<pair<int, int> > Board::getLegalMoves(char sign) {
+int Board::Score(char sign) {
+	int score = 0;
+	// for all places
+	for (int i = 0, j; i < height; i++)
+		for (j = 0; j < width; j++)
+			// if given char was found, increase the score
+			if (board[i][j] == sign) ++score;
+			// if second char was found, decrease the score
+			else if (board[i][j] != ' ') --score;
+	return score;
+}
+
+vector<pair<int, int> > Board::GetLegalMoves(char sign) {
 	vector<pair<int, int> > legalMoves;
-	int i,j;
-	for(i = 0; i< height; i++){
-		for(j = 0; j< width; j++){
+	int i, j;
+	for(i = 1; i <= height; i++){
+		for(j = 1; j <= width; j++){
 			if (CheckLegal(i, j, sign)) {
 				legalMoves.push_back(make_pair(i,j));
 			}

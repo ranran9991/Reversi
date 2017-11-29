@@ -8,7 +8,7 @@
 
 #ifndef BOARD_H_
 #define BOARD_H_
-#define DEFAULT_SIZE_ 8
+#define DEFAULT_SIZE_ 3
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -16,19 +16,22 @@ using namespace std;
 class Board {
 private:
 	char** board;
-	const int height;
-	const int width;
+	int height;
+	int width;
 	bool MakeMoveDir(int, int, int, int, char);
 	bool CheckLegalDir(int, int, int, int, char);
 	bool CheckLegal(int, int, char);
 public:
 	Board(int = DEFAULT_SIZE_, int = DEFAULT_SIZE_);
 	Board(const Board&);
+	Board& operator=(const Board&);
 	bool MakeMove(int, int, char);
 	void ShowPossibleMoves(char);
 	bool PossibleMoveExists(char);
-	vector<pair<int, int> > getLegalMoves(char);
+	vector<pair<int, int> > GetLegalMoves(char);
+	char OtherSign(char);
 	int CountSign(char);
+	int Score(char);
 	virtual ~Board();
 	friend ostream& operator<<(ostream&, Board&);
 };

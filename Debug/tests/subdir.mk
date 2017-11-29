@@ -3,41 +3,24 @@
 ################################################################################
 
 # Add inputs and outputs from these tool invocations to the build variables 
-CC_SRCS += \
-../tests/gtest-all.cc 
-
 CPP_SRCS += \
 ../tests/AllTests.cpp \
-../tests/boardTest.cpp \
-../tests/gameTest.cpp 
-
-CC_DEPS += \
-./tests/gtest-all.d 
+../tests/boardTest.cpp 
 
 OBJS += \
 ./tests/AllTests.o \
-./tests/boardTest.o \
-./tests/gameTest.o \
-./tests/gtest-all.o 
+./tests/boardTest.o 
 
 CPP_DEPS += \
 ./tests/AllTests.d \
-./tests/boardTest.d \
-./tests/gameTest.d 
+./tests/boardTest.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
 tests/%.o: ../tests/%.cpp
 	@echo 'Building file: $<'
 	@echo 'Invoking: GCC C++ Compiler'
-	g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
-	@echo 'Finished building: $<'
-	@echo ' '
-
-tests/%.o: ../tests/%.cc
-	@echo 'Building file: $<'
-	@echo 'Invoking: GCC C++ Compiler'
-	g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
+	g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o"$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 
