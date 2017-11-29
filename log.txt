@@ -1,0 +1,88 @@
+commit f8bdfaf1399ec79e0ddc90cbcd9ab786bf56b775
+Author: Ranran9991 <ranran9991@gmail.com>
+Date:   Wed Nov 29 19:48:42 2017 +0200
+
+    Player is now abstract, added HumanPlayer and AIPlayer
+
+commit 59346c9a92e3e045beac8b9e8f72e802ffcd5ac9
+Author: Ranran9991 <ranran9991@gmail.com>
+Date:   Tue Nov 28 15:12:50 2017 +0200
+
+    eclipse files changed
+
+commit 34200227040602289e0450e0270f64fb624be6ae
+Author: Ranran9991 <ranran9991@gmail.com>
+Date:   Tue Nov 28 15:08:39 2017 +0200
+
+    fixing
+
+commit 67f4ceafd6f457d7edd3787ef410382e0e27dd92
+Author: Ranran9991 <ranran9991@gmail.com>
+Date:   Tue Nov 28 15:06:13 2017 +0200
+
+    I made a mistake, correcting it
+
+commit 598ec8e0430ebbe698c52275e5aa4bf3ac8685a1
+Merge: 72c2dc4 de23bdb
+Author: Ranran9991 <ranran9991@gmail.com>
+Date:   Tue Nov 28 15:01:33 2017 +0200
+
+    Merge branch 'master' of https://github.com/ranran9991/Reversi
+    
+    adding project merging
+
+commit 72c2dc4f1c47bcd4a4dcfefa3e6dc1d8caaced66
+Author: Ranran9991 <ranran9991@gmail.com>
+Date:   Tue Nov 28 15:00:49 2017 +0200
+
+    added Project merging explenation
+
+commit de23bdb6ef8ab701e43bb150e9fe06d10e1a648e
+Author: Ranran9991 <ranran9991@gmail.com>
+Date:   Tue Nov 28 14:48:15 2017 +0200
+
+    Added game test
+
+commit 2b408134ce12bccab7506d23beb788477ce7fbc0
+Author: Ranran9991 <ranran9991@gmail.com>
+Date:   Sat Nov 25 09:18:35 2017 +0200
+
+    Removed old test files
+
+commit 2349c5472b2c068441e06a4a71bdc7dfab8cf30e
+Author: Ranran9991 <ranran9991@gmail.com>
+Date:   Sat Nov 25 09:16:04 2017 +0200
+
+    Added Board.h unit tests
+
+commit 2787233305d1504c13cab0dbeff94826cba54f86
+Merge: 961eb45 6209239
+Author: Ranran9991 <ranran9991@gmail.com>
+Date:   Tue Nov 21 15:19:41 2017 +0200
+
+    Merge branch 'master' of https://github.com/ranran9991/Reversi
+    Merging for initializing purposes
+
+commit 961eb451b445ee3361e2d833d03db60f7585176f
+Author: Ranran9991 <ranran9991@gmail.com>
+Date:   Tue Nov 21 15:16:47 2017 +0200
+
+    Adding the whole Eclipse directory
+
+commit 620923917da770e52d8a6edc80a83c1b463e247c
+Author: Ranran9991 <ranran9991@gmail.com>
+Date:   Sat Nov 18 15:08:31 2017 +0200
+
+    Added main
+
+commit a325090934ad2309a585e835972b2c03d2ba36d1
+Author: Ranran9991 <ranran9991@gmail.com>
+Date:   Sat Nov 18 11:58:42 2017 +0200
+
+    Board no longer Singelton
+
+commit 5eb27bdc029912888a170a829bb2524e45a390bd
+Author: Ranran9991 <ranran9991@gmail.com>
+Date:   Sat Nov 18 11:49:00 2017 +0200
+
+    first commit
