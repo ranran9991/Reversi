@@ -1,4 +1,4 @@
-Player.d: ../Player.cpp ../Player.h ../Board.h
+Player.o: ../Player.cpp ../Player.h ../Board.h
 
 ../Player.h:
 
