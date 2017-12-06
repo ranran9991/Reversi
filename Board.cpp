@@ -1,9 +1,13 @@
 /*
- * Board.cpp
+ * Board.h
  *
- *  Name: Ron Edi
+ *  Ron Edi
  *  ID: 322956897
  *  Exercise Group: 05
+ *
+ *  Ran Elgiser
+ *  ID: 322768805
+ *  Exercise Grope: 05
  */
 
 #include "Board.h"
@@ -24,26 +28,31 @@ Board::Board(int height, int width) : height(height), width(width) {
 }
 
 Board::Board(const Board& b) : height(b.height), width(b.width) {
+	// allocating memory for the board
 	board = new char*[height];
 	for(int i = 0; i < height; i++){
 		board[i] = new char[width];
 		for(int j = 0; j < width; j++)
-			board[i][j] = b.board[i][j];
+			board[i][j] = b.board[i][j]; // copying values from other board to this
 	}
 }
 
 Board& Board::operator=(const Board& b) {
+	// self assignment check
 	if (this != &b) {
+		// deleting allocated place for board
 		for(int i = 0; i < height; i++)
 			delete[] board[i];
 		delete[] board;
+		// copying sizes
 		height = b.height;
 		width = b.width;
+		// allocating new place for board
 		board = new char*[height];
 		for(int i = 0; i < height; i++){
 			board[i] = new char[width];
 			for(int j = 0; j < width; j++)
-				board[i][j] = b.board[i][j];
+				board[i][j] = b.board[i][j]; // copying values from other board to this
 		}
 	}
 	return *this;
@@ -84,6 +93,7 @@ bool Board::MakeMove(int x, int y, char sign) {
 }
 
 char Board::OtherSign(char sign) {
+	// return the other sign
 	if (sign == 'X') return 'O';
 	return 'X';
 }
@@ -166,11 +176,14 @@ int Board::Score(char sign) {
 }
 
 vector<pair<int, int> > Board::GetLegalMoves(char sign) {
-	vector<pair<int, int> > legalMoves;
+	vector<pair<int, int> > legalMoves; // declaring vector of legal moves
 	int i, j;
+	// for all places
 	for(i = 1; i <= height; i++){
 		for(j = 1; j <= width; j++){
+			// if place is legal
 			if (CheckLegal(i, j, sign)) {
+				// push pair of the place to the back of the legal moves vector
 				legalMoves.push_back(make_pair(i,j));
 			}
 		}
