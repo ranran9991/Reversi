@@ -1,18 +1,22 @@
 /*
  * Board.h
  *
- *  Name: Ron Edi
+ *  Ron Edi
  *  ID: 322956897
  *  Exercise Group: 05
+ *
+ *  Ran Elgiser
+ *  ID: 322768805
+ *  Exercise Grope: 05
  */
 
 #include "Game.h"
 #include <iostream>
 
 Game::Game(Board* board, bool AIGame) : AIGame(AIGame), board(board) {
-	black = new HumanPlayer;
-	if (AIGame) white = new AIPlayer ;
-	else white = new HumanPlayer;
+	black = new HumanPlayer; // create new human player
+	if (AIGame) white = new AIPlayer ; // if played against AI player, create AI player
+	else white = new HumanPlayer; // else, create new human player
 	white->SetBoard(board);
 	white->SetSign('O');
 	black->SetBoard(board);
@@ -52,4 +56,9 @@ bool Game::End() {
 	return !(black->PossibleMoveExists() || white->PossibleMoveExists());
 }
 
-Game::~Game() { delete board; }
+Game::~Game() {
+	// deleting memory allocated for board and players
+	delete board;
+	delete white;
+	delete black;
+}

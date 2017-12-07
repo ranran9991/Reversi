@@ -1,4 +1,4 @@
-HumanPlayer.o: ../HumanPlayer.cpp ../HumanPlayer.h ../Player.h ../Board.h
+HumanPlayer.d: ../HumanPlayer.cpp ../HumanPlayer.h ../Player.h ../Board.h
 
 ../HumanPlayer.h:
 
