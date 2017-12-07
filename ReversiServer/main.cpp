@@ -11,7 +11,7 @@
 using namespace std;
 
 int main(){
-	GameServer server(8000);
+	GameServer server("config.txt");
 	server.start();
 	return 1;
 }
