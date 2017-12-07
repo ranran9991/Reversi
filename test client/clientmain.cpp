@@ -50,7 +50,7 @@ int main() {
     			cin>>buffer;
     			send(clientSocket,buffer,sizeof buffer - 1,0);
     			memset(&buffer[0], 0, sizeof(buffer));
-			first = 1;
+			
     		}
     	}
     	if(first == 1){
@@ -65,7 +65,7 @@ int main() {
     		recvValue = recv(clientSocket, buffer, sizeof buffer - 1, 0);
     		cout<<buffer<<endl;
     		//print it
-		first = 0;
+		
     	}
     }
 
