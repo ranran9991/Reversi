@@ -61,16 +61,17 @@ void GameServer::start(){
 		sizeof(serverAddress)) == -1){
 		throw "Error on binding";
 	}
+	listen(serverSocket, MAX_CONNECTED_CLIENTS);
 	//If a game has ended, start a new one
 	while(true){
 		//start listening for clients
-		listen(serverSocket, MAX_CONNECTED_CLIENTS);
-		cout<< "Waiting for connections";
+		cout<<endl;
+		cout<<"Waiting for connections"<<endl;
 		//Accepting first client
 		client1_sd = accept(serverSocket,
 					(struct sockaddr* )&client1Address,
 				 	 &client1AddressLen);
-		cout<< "Client 1 entered!";
+		cout<< "Client 1 entered!"<<endl;
 		//Sending 1 to him to show him he is the first to enter
 		buffer[0] = '1';
 		send(client1_sd,buffer,1024,0);
@@ -78,29 +79,31 @@ void GameServer::start(){
 		client2_sd = accept(serverSocket,
 					(struct sockaddr* )&client1Address,
 					&client1AddressLen);
-		cout<<"Client 2 entered!";
+		cout<<"Client 2 entered!"<<endl;
 		//Sending 2 to him to show him he is the second to enter
 		buffer[0] = '2';
 		send(client2_sd,buffer,1024,0);
 		while(true){
 			memset(&buffer[0], 0, sizeof(buffer));
 			//taking input form client 1
-			recv(client1_sd, buffer, 1024, 0);
-			if(strcmp(buffer, "End") == 0){
+			recv(client1_sd, buffer, 1023, 0);
+			if(!strcmp(buffer, "End")){
 				close(client1_sd);
 				close(client2_sd);
 				break;
 			}
+			cout<<buffer<<endl;
 			//returning the message
-			send(client2_sd, buffer, 1024, 0);
+			send(client2_sd, buffer, 1023, 0);
 			memset(&buffer[0], 0, sizeof(buffer));
 			//taking input from client 2
-			recv(client2_sd, buffer, 1024, 0);
+			recv(client2_sd, buffer, 1023, 0);
 			if(strcmp(buffer, "End") == 0){
 				close(client1_sd);
 				close(client2_sd);
 				break;
 			}
+			cout<<buffer<<endl;
 			//returning the message
 			send(client1_sd, buffer, 1024, 0);
 		}

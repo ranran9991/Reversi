@@ -4,16 +4,13 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../GameServer.cpp \
-../main.cpp 
+../clientmain.cpp 
 
 OBJS += \
-./GameServer.o \
-./main.o 
+./clientmain.o 
 
 CPP_DEPS += \
-./GameServer.d \
-./main.d 
+./clientmain.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
