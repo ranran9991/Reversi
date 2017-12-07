@@ -10,7 +10,7 @@ int main() {
     char buffer[1024];
     struct sockaddr_in serverAddr;
     socklen_t addr_size;
-    int cmdEXIT = 0;
+ 
 
     clientSocket = socket(AF_INET, SOCK_STREAM, 0);
     serverAddr.sin_family = AF_INET;
