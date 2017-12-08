@@ -84,12 +84,21 @@ bool Board::MakeMove(int x, int y, char sign) {
 	--x; --y; // setting relevant values
 	// for each direction
 	for (int i = -1, j; i <= 1; i++)
-			for (j = -1; j <= 1; j++)
-				if (i != 0 || j != 0)
-					// making the move in this direction
-					MakeMoveDir(x+i, y+j, i, j, sign);
+		for (j = -1; j <= 1; j++)
+			if (i != 0 || j != 0)
+				// making the move in this direction
+				MakeMoveDir(x+i, y+j, i, j, sign);
 	board[x][y] = sign; // assigning the char to the given place
+	lastMove = make_pair(x + 1, y + 1);
 	return true;
+}
+
+pair<int, int> Board::GetLastMove() {
+	return lastMove;
+}
+
+void Board::SetLastMove(pair<int, int> move) {
+	lastMove = move;
 }
 
 char Board::OtherSign(char sign) {

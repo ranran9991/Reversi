@@ -1,1 +1,0 @@
-clientmain.o: ../clientmain.cpp

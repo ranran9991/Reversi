@@ -22,6 +22,7 @@ private:
 	char** board;
 	int height;
 	int width;
+	pair<int, int> lastMove;
 	bool MakeMoveDir(int, int, int, int, char);
 	bool CheckLegalDir(int, int, int, int, char);
 	bool CheckLegal(int, int, char);
@@ -30,6 +31,8 @@ public:
 	Board(const Board&);
 	Board& operator=(const Board&);
 	bool MakeMove(int, int, char);
+	pair<int, int> GetLastMove();
+	void SetLastMove(pair<int, int> move);
 	void ShowPossibleMoves(char);
 	bool PossibleMoveExists(char);
 	vector<pair<int, int> > GetLegalMoves(char);

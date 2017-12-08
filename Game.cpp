@@ -13,10 +13,29 @@
 #include "Game.h"
 #include <iostream>
 
-Game::Game(Board* board, bool AIGame) : AIGame(AIGame), board(board) {
-	black = new HumanPlayer; // create new human player
-	if (AIGame) white = new AIPlayer ; // if played against AI player, create AI player
-	else white = new HumanPlayer; // else, create new human player
+Game::Game(Board* board, bool AIGame, bool remoteGame) :
+		AIGame(AIGame), board(board), remoteGame(remoteGame) {
+
+	if (remoteGame) {
+		Player *temp = new RemotePlayer("127.00.00.1", 8001, &first);
+		if(first) {
+			cout << "You are X" << endl;
+			black = new HumanPlayer;
+			white = temp;
+		}
+		else {
+			black = temp;
+			cout << "You are O" << endl;
+			white = new HumanPlayer;
+		}
+	}
+
+	else {
+		black = new HumanPlayer; // create new human player
+		if (AIGame) white = new AIPlayer ; // if played against AI player, create AI player
+		else white = new HumanPlayer; // else, create new human player
+	}
+
 	white->SetBoard(board);
 	white->SetSign('O');
 	black->SetBoard(board);
@@ -24,15 +43,15 @@ Game::Game(Board* board, bool AIGame) : AIGame(AIGame), board(board) {
 }
 
 void Game::Run() {
-	if (AIGame) cout << *board << endl;
+	if (AIGame || remoteGame && first) cout << *board << endl;
 	// while any of the HumanPlayers have a possible move
 	while (true) {
 		if (End()) break;
-		if (!AIGame) cout << *board << endl;
+		if (!AIGame && !remoteGame) cout << *board << endl;
 		// black makes move
 		black->MakeMove();
 		if (End()) break;
-		if (!AIGame) cout << *board << endl;
+		if (!AIGame && !remoteGame) cout << *board << endl;
 		// white makes move
 		white->MakeMove();
 	}

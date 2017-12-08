@@ -4,20 +4,20 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../clientmain.cpp 
+../test\ client/clientmain.cpp 
 
 OBJS += \
-./clientmain.o 
+./test\ client/clientmain.o 
 
 CPP_DEPS += \
-./clientmain.d 
+./test\ client/clientmain.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
-%.o: ../%.cpp
+test\ client/clientmain.o: ../test\ client/clientmain.cpp
 	@echo 'Building file: $<'
 	@echo 'Invoking: GCC C++ Compiler'
-	g++ -O0 -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
+	g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"test client/clientmain.d" -MT"test\ client/clientmain.d" -o"$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

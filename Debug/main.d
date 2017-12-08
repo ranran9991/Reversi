@@ -1,5 +1,5 @@
 main.d: ../main.cpp ../Game.h ../Board.h ../HumanPlayer.h ../Player.h \
- ../AIPlayer.h
+ ../AIPlayer.h ../RemotePlayer.h
 
 ../Game.h:
 
@@ -10,3 +10,5 @@ main.d: ../main.cpp ../Game.h ../Board.h ../HumanPlayer.h ../Player.h \
 ../Player.h:
 
 ../AIPlayer.h:
+
+../RemotePlayer.h:

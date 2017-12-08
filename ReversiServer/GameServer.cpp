@@ -13,7 +13,7 @@
 #include <iostream>
 #include <fstream>
 #include <stdio.h>
-#include <cstdlib> //for std::atoi
+#include <cstdlib> //for std::atoia
 
 
 using namespace std;
@@ -87,6 +87,8 @@ void GameServer::start(){
 		//Sending 2 to him to show him he is the second to enter
 		buffer[0] = '2';
 		write(client2_sd,buffer,sizeof(buffer));
+		//Sending to first player to make him know second player connected
+		write(client1_sd,buffer,sizeof(buffer));
 		while(true){
 			memset(&buffer[0], 0, sizeof(buffer));
 			//taking input form client 1

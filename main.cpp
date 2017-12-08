@@ -15,27 +15,29 @@
 using namespace std;
 
 int main(){
-	int AL;
+	int mode;
 	// print the menu
 	cout <<
 			"Welcome to Reversi!\n\n"
-			"Choose game mode\n\n" <<
-			"    1. Human vs Computer\n" <<
-			"    2. Two players\n\n";
-	cin >> AL;
+			"Choose an opponent type\n\n" <<
+			"    1. A human local player\n" <<
+			"    2. An AI player\n" <<
+			"    3. A remote player\n\n";
+	cin >> mode;
 	cout << endl;
 	// while an invalid input is received
-	while (AL != 1 && AL != 2) {
+	while (mode < 1 || mode > 3) {
 		// print a message and the menu
 		cout << "Invalid choice" << endl;
 		cout <<
-				"Choose game mode\n" <<
-				"    1. Human vs Computer\n" <<
-				"    2. Two players\n\n";
-		cin >> AL;
+				"Choose an opponent type\n\n" <<
+				"    1. A human local player\n" <<
+				"    2. An AI player\n" <<
+				"    3. A remote player\n\n";
+		cin >> mode;
 		cout << endl;
 	}
 	// create the game and run it
-	Game game(new Board(), AL == 1);
+	Game game(new Board(), mode == 2, mode == 3);
 	game.Run();
 }

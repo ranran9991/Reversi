@@ -9,6 +9,7 @@ CPP_SRCS += \
 ../Game.cpp \
 ../HumanPlayer.cpp \
 ../Player.cpp \
+../RemotePlayer.cpp \
 ../main.cpp 
 
 OBJS += \
@@ -17,6 +18,7 @@ OBJS += \
 ./Game.o \
 ./HumanPlayer.o \
 ./Player.o \
+./RemotePlayer.o \
 ./main.o 
 
 CPP_DEPS += \
@@ -25,6 +27,7 @@ CPP_DEPS += \
 ./Game.d \
 ./HumanPlayer.d \
 ./Player.d \
+./RemotePlayer.d \
 ./main.d 
 
 

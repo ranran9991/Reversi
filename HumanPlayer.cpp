@@ -38,6 +38,7 @@ void HumanPlayer::MakeMove() {
 		cin.ignore();
 		cin.get();
 		cout << endl;
+		board->SetLastMove(make_pair(0,0));
 	}
 	cout << endl;
 }

@@ -15,15 +15,18 @@
 #include "Board.h"
 #include "HumanPlayer.h"
 #include "AIPlayer.h"
+#include "RemotePlayer.h"
 
 class Game {
 private:
 	Board *board;
 	Player *black;
 	Player *white;
+	bool first;
 	bool AIGame;
+	bool remoteGame;
 public:
-	Game(Board*, bool = false);
+	Game(Board*, bool = false, bool = false);
 	void Run();
 	bool End();
 	virtual ~Game();

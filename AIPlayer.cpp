@@ -20,6 +20,7 @@ void AIPlayer::MakeMove() {
 		// print the board and message
 		cout << *board << endl;
 		cout << sign << " has no possible moves, play passes back to you.\n\n";
+		board->SetLastMove(make_pair(0,0));
 		return;
 	}
 
