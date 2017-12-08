@@ -11,7 +11,12 @@
 using namespace std;
 
 int main(){
+	try{
 	GameServer server("config.txt");
 	server.start();
-	return 1;
+	}
+	catch(const char* temp){
+		cout<<temp;
+	}
+	return 0;
 }
