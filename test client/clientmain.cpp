@@ -81,9 +81,7 @@ int main() {
 				throw "Error reading from socket from client 2";
 			}
 			cout<<buffer<<endl;
-
 		}
 	}
-
 	return 0;
 }
