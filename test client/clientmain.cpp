@@ -81,63 +81,7 @@ int main() {
 				throw "Error reading from socket from client 2";
 			}
 			cout<<buffer<<endl;
-
-<<<<<<< HEAD
 		}
 	}
-
 	return 0;
-=======
-    connect(clientSocket, (struct sockaddr *) &serverAddr, addr_size);
-	//Server tells the client if hes first or second
-    recv(clientSocket, buffer, sizeof buffer - 1, 0);
-    //assigning the "first" variable
-    if(!strcmp(buffer,"1")){
-    	first = 1;
-    	cout<<1<<endl;
-    }
-    else if(!strcmp(buffer,"2")){
-    	first = 0;
-    	cout<< 0<<endl;
-    }
-    else{
-    	cout<<"Error";
-    	return 0;
-    }
-    while (cmdEXIT == 0)
-    {
-    	cout<<endl;
-    	if(first == 0){
-    		memset(&buffer[0], 0, sizeof(buffer));
-    		//read from server
-    		recvValue = recv(clientSocket, buffer, sizeof buffer - 1, 0);
-    		cout<<buffer<<endl;
-    		//print it
-    		memset(&buffer[0], 0, sizeof(buffer));
-    		//write to buffer
-    		if(recvValue == 1){
-    			cin>>buffer;
-    			send(clientSocket,buffer,sizeof buffer - 1,0);
-    			memset(&buffer[0], 0, sizeof(buffer));
-			
-    		}
-    	}
-    	if(first == 1){
-    		memset(&buffer[0], 0, sizeof(buffer));
-    		//write to buffer
-    		if(recvValue == 1){
-    			cin>>buffer;
-    			send(clientSocket,buffer,sizeof buffer - 1,0);
-    			memset(&buffer[0], 0, sizeof(buffer));
-    		}
-    		//read from server
-    		recvValue = recv(clientSocket, buffer, sizeof buffer - 1, 0);
-    		cout<<buffer<<endl;
-    		//print it
-		
-    	}
-    }
-
-    return 0;
->>>>>>> d6fdb6c00963bac7dd2336df41ec533bf6c16dfc
 }
