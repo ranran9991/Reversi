@@ -39,6 +39,7 @@ GameServer::GameServer(char* fileName): serverSocket(0){
 	    	return;
 	    }
 	}
+	config.close();
 }
 void GameServer::start(){
 	int client1_sd, client2_sd;
