@@ -93,10 +93,7 @@ void GameServer::start(){
 		while(true){
 			memset(&buffer[0], 0, sizeof(buffer));
 			//taking input form client 1
-			if(read(client1_sd, buffer, sizeof(buffer))<=0){
-				throw "Error on reading in server";
-			}
-			if(!strcmp(buffer, "End")){
+			if(read(client1_sd, buffer, sizeof(buffer))<=0 or !strcmp(buffer, "End")) {										!strcmp(buffer, "End")){
 				close(client1_sd);
 				close(client2_sd);
 				break;
@@ -104,22 +101,25 @@ void GameServer::start(){
 			cout<<buffer<<endl;
 			//returning the message
 			if(write(client2_sd, buffer, sizeof(buffer))<=0){
-				throw "Error on writing in server";
+				close(client1_sd);
+				close(client2_sd);
+				break;
 			}
 			memset(&buffer[0], 0, sizeof(buffer));
 			//taking input from client 2
-			if(read(client2_sd, buffer, sizeof(buffer))<=0){
-				throw "Error on reading from server";
-			}
-			if(strcmp(buffer, "End") == 0){
-				close(client1_sd);
+			if(read(client2_sd, buffer, sizeof(buffer))<=0){				
+					
+				close(client2_sd);
+				break;								
 				close(client2_sd);
 				break;
 			}
 			cout<<buffer<<endl;
 			//returning the message
 			if(write(client1_sd, buffer, sizeof(buffer))<0){
-				throw "Error on writing to server";
+				close(client1_sd);
+				close(client2_sd);
+				break;
 			}
 		}
 	}
