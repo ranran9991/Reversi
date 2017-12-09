@@ -17,7 +17,7 @@ Game::Game(Board* board, bool AIGame, bool remoteGame) :
 		AIGame(AIGame), board(board), remoteGame(remoteGame) {
 
 	if (remoteGame) {
-		Player *temp = new RemotePlayer("127.00.00.1", 8001, &first);
+		Player *temp = new RemotePlayer("config.txt", &first);
 		if(first) {
 			cout << "You are X" << endl;
 			black = new HumanPlayer;
