@@ -30,7 +30,7 @@ private:
 	char buffer[BUFFER_SIZE_];
 	bool first;
 public:
-	RemotePlayer(const char *ip, int port, bool *first);
+	RemotePlayer(char* fileName, bool *first);
 	void MakeMove();
 	~RemotePlayer();
 };
