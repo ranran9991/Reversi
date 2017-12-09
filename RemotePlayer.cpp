@@ -12,8 +12,29 @@
 
 #include "RemotePlayer.h"
 
-RemotePlayer::RemotePlayer(const char *ip, int port, bool *first) :
-		Player(), ip(ip), port(port), clientSocket(0) {
+RemotePlayer::RemotePlayer(char* fileName, bool *first) :
+		Player(), clientSocket(0) {
+	//getting ip and port from file
+	string buffer;
+	ifstream config;
+	config.open(fileName);
+	if(!config){
+		throw "Can't open file, aborting";
+	}
+	while (!config.eof()) {
+	    config >> buffer;
+	    if(buffer == "IP"){
+	    	config>>buffer; // buffer = "="
+		config>>buffer; //buffer equls the IP;
+		ip = buffer.c_str();
+	    }
+	    if(buffer == "Port"){
+	    	config>>buffer; // buffer = "="
+	    	config>>buffer; // buffer equals the port
+	    	port = atoi(buffer.c_str());
+	    	return;
+	    }
+	}
 	clientSocket = socket(AF_INET, SOCK_STREAM, 0);
 	if (clientSocket == -1) {
 		throw "Error opening socket";
