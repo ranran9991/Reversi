@@ -32,9 +32,9 @@ RemotePlayer::RemotePlayer(char* fileName, bool *first) :
 	    	config>>buffer; // buffer = "="
 	    	config>>buffer; // buffer equals the port
 	    	port = atoi(buffer.c_str());
-	    	return;
 	    }
 	}
+	//initializing socket 
 	clientSocket = socket(AF_INET, SOCK_STREAM, 0);
 	if (clientSocket == -1) {
 		throw "Error opening socket";
