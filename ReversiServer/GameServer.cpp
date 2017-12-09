@@ -108,10 +108,8 @@ void GameServer::start(){
 			memset(&buffer[0], 0, sizeof(buffer));
 			//taking input from client 2
 			if(read(client2_sd, buffer, sizeof(buffer))<=0){				
-					
-				close(client2_sd);
-				break;								
-				close(client2_sd);
+					close(client1_sd);
+				close(client2_sd);																
 				break;
 			}
 			cout<<buffer<<endl;
