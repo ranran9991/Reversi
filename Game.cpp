@@ -17,6 +17,7 @@ Game::Game(Board* board, bool AIGame, bool remoteGame) :
 		AIGame(AIGame), board(board), remoteGame(remoteGame) {
 
 	if (remoteGame) {
+		//Creating remote player and reading the IP and Port from clientconfig.txt
 		Player *temp = new RemotePlayer("clientconfig.txt", &first);
 		if(first) {
 			cout << "You are X\n\n";
