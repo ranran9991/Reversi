@@ -80,7 +80,9 @@ void RemotePlayer::MakeMove() {
 	cout << "Current board:\n\n" << *board <<"\nWaiting for other player's move...\n\n";
 	if (!first) {
 		ostringstream os;
-		os << board->GetLastMove().first << "," << board->GetLastMove().second << '\0';
+		if (board->GetLastMove().first != 0)
+			os << board->GetLastMove().first << "," << board->GetLastMove().second << '\0';
+		else os << "NoMove\0";
 		memset(buffer, '\0', BUFFER_SIZE_);
 		strcpy(buffer, os.str().c_str());
 		n = write(clientSocket, buffer, BUFFER_SIZE_);
@@ -94,7 +96,7 @@ void RemotePlayer::MakeMove() {
 	if (n == -1) {
 		throw "Error reading move from socket";
 	}
-	if (buffer[0] != '0') {
+	if (strcmp(buffer, "NoMove")) {
 		string str(buffer);
 		int i = str.find(",");
 		//cout << str.substr(0,i).c_str() << endl;
