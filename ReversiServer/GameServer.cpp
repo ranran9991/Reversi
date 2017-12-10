@@ -93,7 +93,7 @@ void GameServer::start(){
 		while(true){
 			memset(&buffer[0], 0, sizeof(buffer));
 			//taking input form client 1
-			if(read(client1_sd, buffer, sizeof(buffer))<=0 or !strcmp(buffer, "End")) {										!strcmp(buffer, "End")){
+			if(read(client1_sd, buffer, sizeof(buffer))<=0 || !strcmp(buffer, "End")) {
 				close(client1_sd);
 				close(client2_sd);
 				break;

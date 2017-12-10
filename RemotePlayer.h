@@ -19,16 +19,19 @@
 #include <string.h>
 #include <unistd.h>
 #include <sstream>
+#include <fstream>
+#include <cstdlib>
 #include "Player.h"
 #define BUFFER_SIZE_ 1024
 
 class RemotePlayer : public Player {
 private:
-	const char *ip;
+	char ip[32];
 	int port;
 	int clientSocket;
 	char buffer[BUFFER_SIZE_];
 	bool first;
+	pair<int, int> lastMove;
 public:
 	RemotePlayer(char* fileName, bool *first);
 	void MakeMove();

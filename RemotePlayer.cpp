@@ -15,25 +15,20 @@
 RemotePlayer::RemotePlayer(char* fileName, bool *first) :
 		Player(), clientSocket(0) {
 	//getting ip and port from file
-	string buffer;
+	string buf;
 	ifstream config;
 	config.open(fileName);
 	if(!config){
 		throw "Can't open file, aborting";
 	}
-	while (!config.eof()) {
-	    config >> buffer;
-	    if(buffer == "IP"){
-	    	config>>buffer; // buffer = "="
-		config>>buffer; //buffer equls the IP;
-		ip = buffer.c_str();
-	    }
-	    if(buffer == "Port"){
-	    	config>>buffer; // buffer = "="
-	    	config>>buffer; // buffer equals the port
-	    	port = atoi(buffer.c_str());
-	    }
-	}
+	config >> buf;
+	config >> buf;
+	config >> buf;
+	strcpy(ip, buf.c_str());
+	config >> buf; // buffer equals the port
+	config >> buf;
+	config >> buf;
+	port = atoi(buf.c_str());
 	//initializing socket 
 	clientSocket = socket(AF_INET, SOCK_STREAM, 0);
 	if (clientSocket == -1) {
@@ -100,10 +95,38 @@ void RemotePlayer::MakeMove() {
 		throw "Error reading move from socket";
 	}
 	if (buffer[0] != '0') {
-		board->MakeMove(buffer[0]-'0', buffer[2]-'0', sign);
+		string str(buffer);
+		int i = str.find(",");
+		//cout << str.substr(0,i).c_str() << endl;
+		int x = atoi(str.substr(0,i).c_str());
+		int y = atoi(str.substr(i+1).c_str());
+		board->MakeMove(x, y, sign);
 		cout << *board << endl; // print the board
-		cout << sign << " played (" << buffer[0] << "," << buffer[2] << ")\n\n";
+		cout << sign << " played (" << x << "," << y << ")\n\n";
+		lastMove = make_pair(x, y);
+		return;
 	}
+	cout << "Other player had no possible moves. Play passes back to you.\n\n";
+	lastMove = make_pair(0, 0);
 }
 
-RemotePlayer::~RemotePlayer() { }
+RemotePlayer::~RemotePlayer() {
+	int n;
+	if (!(lastMove == board->GetLastMove())) {
+		ostringstream os;
+		os << board->GetLastMove().first << "," << board->GetLastMove().second << '\0';
+		memset(buffer, '\0', BUFFER_SIZE_);
+		strcpy(buffer, os.str().c_str());
+		n = write(clientSocket, buffer, BUFFER_SIZE_);
+		if (n == -1) {
+			throw "Error writing move to socket";
+		}
+	}
+	memset(buffer, '\0', BUFFER_SIZE_);
+	strcpy(buffer, "End");
+	n = write(clientSocket, buffer, BUFFER_SIZE_);
+	if (n == -1) {
+		throw "Error writing move to socket";
+	}
+	close(clientSocket);
+}

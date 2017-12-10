@@ -17,15 +17,15 @@ Game::Game(Board* board, bool AIGame, bool remoteGame) :
 		AIGame(AIGame), board(board), remoteGame(remoteGame) {
 
 	if (remoteGame) {
-		Player *temp = new RemotePlayer("config.txt", &first);
+		Player *temp = new RemotePlayer("clientconfig.txt", &first);
 		if(first) {
-			cout << "You are X" << endl;
+			cout << "You are X\n\n";
 			black = new HumanPlayer;
 			white = temp;
 		}
 		else {
+			cout << "You are O\n\n";
 			black = temp;
-			cout << "You are O" << endl;
 			white = new HumanPlayer;
 		}
 	}

@@ -34,7 +34,7 @@ void HumanPlayer::MakeMove() {
 	// else, print no possible moves
 	else {
 		cout << "No possible moves. Play passes back to the other player." <<
-				" Press any key to continue. ";
+				" Press any key to continue... ";
 		cin.ignore();
 		cin.get();
 		cout << endl;

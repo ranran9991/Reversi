@@ -12,6 +12,15 @@ CPP_SRCS += \
 ../RemotePlayer.cpp \
 ../main.cpp 
 
+O_SRCS += \
+../AIPlayer.o \
+../Board.o \
+../Game.o \
+../HumanPlayer.o \
+../Player.o \
+../RemotePlayer.o \
+../main.o 
+
 OBJS += \
 ./AIPlayer.o \
 ./Board.o \

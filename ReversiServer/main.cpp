@@ -12,7 +12,7 @@ using namespace std;
 
 int main(){
 	try{
-	GameServer server("config.txt");
+	GameServer server("serverconfig.txt");
 	server.start();
 	}
 	catch(const char* temp){

@@ -26,7 +26,7 @@ public:
 	void SetBoard(Board*);
 	virtual void MakeMove()=0;
 	bool PossibleMoveExists();
-	~Player();
+	virtual ~Player();
 };
 
 #endif /* PLAYER_H_ */
