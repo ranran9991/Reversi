@@ -1,8 +1,176 @@
+commit 1d368cb61c40baafe19740205aa5aa9ab8407234
+Author: ranran9991 <ranran9991@gmail.com>
+Date:   Sat Dec 9 20:06:47 2017 +0200
+
+    Update GameServer.cpp
+
+commit 7a01504b09574a0583e2663a591f3a9bfec48acc
+Author: ranran9991 <ranran9991@gmail.com>
+Date:   Sat Dec 9 19:57:12 2017 +0200
+
+    Update GameServer.cpp
+
+commit b18e19dd50181e67fe32526d8e0e0825aca1a79d
+Author: ranran9991 <ranran9991@gmail.com>
+Date:   Sat Dec 9 11:32:52 2017 +0200
+
+    Update Game.cpp
+
+commit cf3a60178ba5d29bf4a4c5dea088873cc37436bf
+Author: ranran9991 <ranran9991@gmail.com>
+Date:   Sat Dec 9 11:31:48 2017 +0200
+
+    Create config.txt
+
+commit e6f3e595ac839376c42694d7a1ef8a1cb25c687c
+Author: ranran9991 <ranran9991@gmail.com>
+Date:   Sat Dec 9 11:29:13 2017 +0200
+
+    Added config constructor
+
+commit a351310831e7202210f7ad9c39cfc064334b7e0d
+Author: ranran9991 <ranran9991@gmail.com>
+Date:   Sat Dec 9 11:28:04 2017 +0200
+
+    Update GameServer.cpp
+
+commit d5d42f393884495b4e269e61bffe6c9314d53212
+Author: ranran9991 <ranran9991@gmail.com>
+Date:   Sat Dec 9 11:27:26 2017 +0200
+
+    Update RemotePlayer.cpp
+
+commit e335269b4ea81ad9eeb40261eb25797ad8111a78
+Author: ranran9991 <ranran9991@gmail.com>
+Date:   Sat Dec 9 11:25:10 2017 +0200
+
+    Update RemotePlayer.h
+
+commit 84416b7bfb00349cb22c5d725c0a7ba33e9e34a8
+Author: Ron Edi <ronedi62@gmail.com>
+Date:   Fri Dec 8 23:25:29 2017 +0200
+
+    Remote player added
+
+commit e1c553f4304fe5bfa7716c63f1c233e258479862
+Merge: b4d2902 a0782b1
+Author: Ranran9991 <ranran9991@gmail.com>
+Date:   Fri Dec 8 18:57:37 2017 +0200
+
+    Final client test
+
+commit b4d2902233bfc723d0d46722b43e5a84d91200c8
+Author: Ranran9991 <ranran9991@gmail.com>
+Date:   Fri Dec 8 18:56:17 2017 +0200
+
+    Final client test
+
+commit a0782b1fca1655265232c43e5bd144163e696e3f
+Author: ranran9991 <ranran9991@gmail.com>
+Date:   Fri Dec 8 17:57:54 2017 +0200
+
+    Update clientmain.cpp
+
+commit e9c11a23d29c48f3864688b751f838d24739e7bd
+Merge: ac15e1c d6fdb6c
+Author: Ranran9991 <ranran9991@gmail.com>
+Date:   Fri Dec 8 11:39:31 2017 +0200
+
+    Changed server IO timing problem
+
+commit ac15e1c3623d34cc720526b02af22c4c00a05468
+Author: Ranran9991 <ranran9991@gmail.com>
+Date:   Fri Dec 8 11:37:47 2017 +0200
+
+    Fixed the server client order of IO problem
+
+commit d6fdb6c00963bac7dd2336df41ec533bf6c16dfc
+Author: ranran9991 <ranran9991@gmail.com>
+Date:   Thu Dec 7 23:46:30 2017 +0200
+
+    Delete config
+
+commit 0fe9e07b7b736835e8c5daabf845d7f23560eced
+Author: ranran9991 <ranran9991@gmail.com>
+Date:   Thu Dec 7 23:46:06 2017 +0200
+
+    Delete README.txt
+
+commit d7fbfad102ac6c36f5ade533d8f4b8aab3a5ff71
+Author: ranran9991 <ranran9991@gmail.com>
+Date:   Thu Dec 7 23:17:52 2017 +0200
+
+    Update clientmain.cpp
+
+commit b0c88e466bbb805fe5d47d4d8f691c4e9ffecc63
+Author: ranran9991 <ranran9991@gmail.com>
+Date:   Thu Dec 7 22:48:24 2017 +0200
+
+    Update clientmain.cpp
+
+commit c78287ba5e70c59c648ac452bb8f5792a53e7288
+Merge: c92ce9c e600f93
+Author: Ranran9991 <ranran9991@gmail.com>
+Date:   Thu Dec 7 20:00:37 2017 +0200
+
+    Merge branch 'master' of https://github.com/ranran9991/Reversi
+    
+    fixing merge
+
+commit c92ce9c9e996279960aec23c5403b942adaca083
+Author: Ranran9991 <ranran9991@gmail.com>
+Date:   Thu Dec 7 20:00:10 2017 +0200
+
+    added file constructor in ReversiServer
+
+commit e600f934996856a5f8ff039d4d7689a765e729f3
+Author: ranran9991 <ranran9991@gmail.com>
+Date:   Thu Dec 7 16:52:30 2017 +0200
+
+    Update clientmain.cpp
+
+commit 0aad93f1a7419e44ab41e3b347cf1faea6bc780c
+Merge: 8228cc0 f5a4845
+Author: Ranran9991 <ranran9991@gmail.com>
+Date:   Thu Dec 7 16:39:34 2017 +0200
+
+    fixed merge error
+
+commit 8228cc044beec55fc0fe56d2a0a0eb705b8ee331
+Author: Ranran9991 <ranran9991@gmail.com>
+Date:   Thu Dec 7 16:38:03 2017 +0200
+
+    added client test folder
+
+commit f5a48451823bb8e0dd1114b24e8905eccd468bc4
+Author: Ron Edi <ronedi62@gmail.com>
+Date:   Wed Dec 6 20:27:12 2017 +0200
+
+    Lastest version commited
+
+commit 5b5c34ff9e68752b051aefc9a45ce49b5afadd3e
+Author: ranran9991 <ranran9991@gmail.com>
+Date:   Sun Dec 3 09:23:14 2017 +0200
+
+    Update config
+
+commit b470bb034d0ecf51ba5a455f11f62953379c269d
+Author: Ranran9991 <ranran9991@gmail.com>
+Date:   Sat Dec 2 09:32:00 2017 +0200
+
+    added ReversiServer, note that it is not yet tested
+
+commit 343cc50d9016bbee4e5296ff25a595e6f854eb91
+Author: Ranran9991 <ranran9991@gmail.com>
+Date:   Wed Nov 29 19:52:28 2017 +0200
+
+    added log file
+
 commit f8bdfaf1399ec79e0ddc90cbcd9ab786bf56b775
 Author: Ranran9991 <ranran9991@gmail.com>
 Date:   Wed Nov 29 19:48:42 2017 +0200
 
-    Player is now abstract, added HumanPlayer and AIPlayer
+    Player is no abstract, added HumanPlayer and AIPlayer
 
 commit 59346c9a92e3e045beac8b9e8f72e802ffcd5ac9
 Author: Ranran9991 <ranran9991@gmail.com>
@@ -35,7 +203,7 @@ commit 72c2dc4f1c47bcd4a4dcfefa3e6dc1d8caaced66
 Author: Ranran9991 <ranran9991@gmail.com>
 Date:   Tue Nov 28 15:00:49 2017 +0200
 
-    added Project merging explenation
+    added Project merging explenetion
 
 commit de23bdb6ef8ab701e43bb150e9fe06d10e1a648e
 Author: Ranran9991 <ranran9991@gmail.com>

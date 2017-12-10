@@ -19,6 +19,7 @@ RemotePlayer::RemotePlayer(char* fileName, bool *first) :
 	ifstream config;
 	config.open(fileName);
 	if(!config){
+		//if file cant be opened
 		throw "Can't open file, aborting";
 	}
 	config >> buf;
@@ -32,13 +33,16 @@ RemotePlayer::RemotePlayer(char* fileName, bool *first) :
 	//initializing socket 
 	clientSocket = socket(AF_INET, SOCK_STREAM, 0);
 	if (clientSocket == -1) {
+		//if socket can't be opened
 		throw "Error opening socket";
 	}
 	struct in_addr address;
 	if (!inet_aton(ip, &address)) {
+		//if IP address cant be parsed
 		throw "Can't parse IP address";
 	}
 	struct hostent *server;
+	//if a server with this address can't be reached
 	server = gethostbyaddr((const void*)&address, sizeof address, AF_INET);
 	if (server == NULL) {
 		throw "Host is unreachable";
@@ -57,9 +61,11 @@ RemotePlayer::RemotePlayer(char* fileName, bool *first) :
 	cout <<	"Connected to server" << endl;
 	int n = read(clientSocket, buffer, BUFFER_SIZE_);
 	if (n == -1) {
+		//if there was an error reading from the socket
 		throw "Error reading from socket";
 	}
 	if (buffer[0] == '1') {
+		//if this client is first
 		cout << "Waiting for other player to join...\n\n";
 		memset(buffer, '\0', BUFFER_SIZE_);
 		n = read(clientSocket, buffer, BUFFER_SIZE_);
@@ -70,6 +76,7 @@ RemotePlayer::RemotePlayer(char* fileName, bool *first) :
 		this->first = false;
 	}
 	else {
+		//if the client is second 
 		*first = false;
 		this->first = true;
 	}
@@ -79,12 +86,14 @@ void RemotePlayer::MakeMove() {
 	int n;
 	cout << "Current board:\n\n" << *board <<"\nWaiting for other player's move...\n\n";
 	if (!first) {
+		//making a string "X, Y" from the move on board X Y
 		ostringstream os;
 		os << board->GetLastMove().first << "," << board->GetLastMove().second << '\0';
 		memset(buffer, '\0', BUFFER_SIZE_);
 		strcpy(buffer, os.str().c_str());
 		n = write(clientSocket, buffer, BUFFER_SIZE_);
 		if (n == -1) {
+			//Writing to socket wasn't successful
 			throw "Error writing move to socket";
 		}
 	}
@@ -95,11 +104,12 @@ void RemotePlayer::MakeMove() {
 		throw "Error reading move from socket";
 	}
 	if (buffer[0] != '0') {
+		//Reverting the string "X, Y" into two numbers, X and Y
 		string str(buffer);
 		int i = str.find(",");
-		//cout << str.substr(0,i).c_str() << endl;
 		int x = atoi(str.substr(0,i).c_str());
 		int y = atoi(str.substr(i+1).c_str());
+		//making the move itself
 		board->MakeMove(x, y, sign);
 		cout << *board << endl; // print the board
 		cout << sign << " played (" << x << "," << y << ")\n\n";
@@ -111,8 +121,12 @@ void RemotePlayer::MakeMove() {
 }
 
 RemotePlayer::~RemotePlayer() {
+	//This destructor reads the last move of the game
+	//this is not in the make move section because after one player finishes the game
+	//he cant send his move to the other player in the main game loop.
 	int n;
 	if (!(lastMove == board->GetLastMove())) {
+		//casting the string to a pair
 		ostringstream os;
 		os << board->GetLastMove().first << "," << board->GetLastMove().second << '\0';
 		memset(buffer, '\0', BUFFER_SIZE_);
@@ -128,5 +142,6 @@ RemotePlayer::~RemotePlayer() {
 	if (n == -1) {
 		throw "Error writing move to socket";
 	}
+	//close socket at the end of the lifetime of the player
 	close(clientSocket);
 }
