@@ -44,7 +44,7 @@ Game::Game(Board* board, bool AIGame, bool remoteGame) :
 }
 
 void Game::Run() {
-	if (AIGame || remoteGame && first) cout << *board << endl;
+	if (AIGame || (remoteGame && first)) cout << *board << endl;
 	// while any of the HumanPlayers have a possible move
 	while (true) {
 		if (End()) break;
