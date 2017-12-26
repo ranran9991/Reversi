@@ -9,15 +9,16 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <unistd.h>
+#include <sstream>
 #include <string.h>
 #include <iostream>
 #include <fstream>
 #include <stdio.h>
-#include <cstdlib> //for std::atoia
+#include <cstdlib> //for std::atoi, itoa
 
 
 using namespace std;
-#define MAX_CONNECTED_CLIENTS 2
+#define MAX_CONNECTED_CLIENTS 10
 
 GameServer::GameServer(int port): port(port), serverSocket(0){
 	cout<<"Server initialized through constructor";
@@ -42,11 +43,26 @@ GameServer::GameServer(char* fileName): serverSocket(0){
 	config.close();
 }
 void GameServer::start(){
-	int client1_sd, client2_sd;
+	int client1_sd;
+	/*
+	 * Both of these variables are used to create a changing number of threads
+	 * Ill allocate a thread for each client
+	 */
+	vector<pthread_t *> threadList;
+	int threadIndex = 0;
+	pthread_t exitThread; //this thread is used to provide a way to close the server.
+	CommunicationSockets sock;
+	sock.serverSocket = serverSocket;
 	char buffer[1024];
 	//clients' variables
-	struct sockaddr_in client1Address, client2Address;
-	socklen_t client1AddressLen = 0, client2AddressLen = 0;
+	struct sockaddr_in client1Address;
+	socklen_t client1AddressLen = 0;
+	/*
+	 * Creating thread that will listen to the exit command
+	 */
+	if(pthread_create(&exitThread, NULL, waitForExit, this )){
+		throw "Error opening thread";
+	}
 	//cleaning buffer
 	memset(&buffer[0], 0, sizeof(buffer));
 	//Creating the socket
@@ -70,55 +86,75 @@ void GameServer::start(){
 	listen(serverSocket, MAX_CONNECTED_CLIENTS);
 	//If a game has ended, start a new one
 	while(true){
-		//start listening for clients
-		cout<<"Waiting for connections"<<endl;
-		//Accepting first client
+		threadList.push_back(new pthread_t);
+		//Accepting client
 		client1_sd = accept(serverSocket,
 					(struct sockaddr* )&client1Address,
 				 	 &client1AddressLen);
-		cout<< "Client 1 entered!"<<endl;
-		//Sending 1 to him to show him he is the first to enter
-		buffer[0] = '1';
-		write(client1_sd,buffer,sizeof(buffer));
-		//Accepting second client
-		client2_sd = accept(serverSocket,
-					(struct sockaddr* )&client1Address,
-					&client1AddressLen);
-		cout<<"Client 2 entered!"<<endl;
-		//Sending 2 to him to show him he is the second to enter
-		buffer[0] = '2';
-		write(client2_sd,buffer,sizeof(buffer));
-		//Sending to first player to make him know second player connected
-		write(client1_sd,buffer,sizeof(buffer));
-		while(true){
-			memset(&buffer[0], 0, sizeof(buffer));
-			//taking input form client 1
-			if(read(client1_sd, buffer, sizeof(buffer))<=0 || !strcmp(buffer, "End")) {
-				close(client1_sd);
-				close(client2_sd);
-				break;
+		//pushing the client into the client vector
+		clientList.push_back(client1_sd);
+		sock.clientSocket = client1_sd;
+		if(pthread_create(threadList[threadIndex], NULL, handleClient, &sock)){
+			throw "Error opening thread";
+		}
+		threadIndex++;
+	}
+}
+
+void* GameServer::handleClient(void* socket) {
+	vector<string> args;
+	bool readNextArg = false;
+	char buffer[1024];
+	char* token;//for tokenizing the buffer
+	string command;//holds the command (Ex: "start", "join")
+	CommunicationSockets* sock = (CommunicationSockets *)socket;
+	CommandManager com;
+	stringstream ss;
+	while(true){
+		ss.str("");
+		ss.clear();
+		ss << sock->clientSocket;
+		args.push_back(ss.str()); //every command needs the socket_id of the client
+		read(sock->clientSocket, buffer, sizeof(buffer));
+		//tokenizing the string
+		token = strtok(buffer, " ");
+		//command = the first token in buffer which is the command itself.
+		command = token;
+		while(token){
+
+			if(command == "join" || command == "start"){
+				//if the command requires taking input from arguments
+				readNextArg = true;
 			}
-			cout<<buffer<<endl;
-			//returning the message
-			if(write(client2_sd, buffer, sizeof(buffer))<=0){
-				close(client1_sd);
-				close(client2_sd);
-				break;
+			if(readNextArg){
+				//push arguments into the args vector
+				args.push_back(token);
 			}
-			memset(&buffer[0], 0, sizeof(buffer));
-			//taking input from client 2
-			if(read(client2_sd, buffer, sizeof(buffer))<=0){				
-					close(client1_sd);
-				close(client2_sd);																
-				break;
-			}
-			cout<<buffer<<endl;
-			//returning the message
-			if(write(client1_sd, buffer, sizeof(buffer))<0){
-				close(client1_sd);
-				close(client2_sd);
-				break;
-			}
+			token = strtok(NULL, " ");
+		}
+		//execute the command
+		com.executeCommand(command, args);
+		args.clear();
+	}
+	return NULL;
+}
+
+void GameServer::stop() {
+	char end[] = "End";
+	for(vector<int>::iterator it = clientList.begin(); it!=clientList.end(); it++){
+		write(*it, end, 1024 /*size of buffer*/);
+		close(*it);
+	}
+	close(serverSocket);
+}
+
+void* GameServer::waitForExit(void* server) {
+	string input;
+	GameServer* serv = (GameServer *)(server);
+	while(true){
+		cin>>input;
+		if(input == "exit"){
+			serv->stop();
 		}
 	}
 }

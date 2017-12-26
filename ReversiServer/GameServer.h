@@ -13,6 +13,8 @@
 #include <string.h>
 #include <iostream>
 #include <stdio.h>
+#include <vector>
+#include "CommandManager.h"
 using namespace std;
 
 class GameServer {
@@ -26,6 +28,14 @@ class GameServer {
 private:
 	int port;
 	int serverSocket;
+	vector<int> clientList;
+	/*
+	 * This holds the whole list of clients
+	 * it is used to close every connection in case
+	 * the server closes unexpectedly or through the exit command
+	 */
+
+
 public:
 	GameServer(int port);
 	/*
@@ -33,7 +43,18 @@ public:
 	 */
 	GameServer(char* fileName);
 	void start();
-	void stop();
+	static void* handleClient(void* );//void* for pthread usage
+	static void* waitForExit(void* ); //function to wait for exit command from console
+	void stop(); //stops the server and closes every client socket
+};
+
+struct CommunicationSockets{
+		/*
+		 * This struct will be passed to handleClient as input
+		 * throw pthread_create function
+		 */
+		int serverSocket;
+		int clientSocket;
 };
 
 #endif /* GAMESERVER_H_ */

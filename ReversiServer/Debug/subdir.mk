@@ -4,15 +4,37 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
+../Command.cpp \
+../CommandManager.cpp \
 ../GameServer.cpp \
+../JoinCommand.cpp \
+../ListGamesCommand.cpp \
+../RoomCommand.cpp \
+../StartCommand.cpp \
 ../main.cpp 
 
+O_SRCS += \
+../GameServer.o \
+../main.o 
+
 OBJS += \
+./Command.o \
+./CommandManager.o \
 ./GameServer.o \
+./JoinCommand.o \
+./ListGamesCommand.o \
+./RoomCommand.o \
+./StartCommand.o \
 ./main.o 
 
 CPP_DEPS += \
+./Command.d \
+./CommandManager.d \
 ./GameServer.d \
+./JoinCommand.d \
+./ListGamesCommand.d \
+./RoomCommand.d \
+./StartCommand.d \
 ./main.d 
 
 
