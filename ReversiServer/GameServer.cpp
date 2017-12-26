@@ -155,6 +155,7 @@ void* GameServer::waitForExit(void* server) {
 		cin>>input;
 		if(input == "exit"){
 			serv->stop();
+			exit(0);
 		}
 	}
 }
