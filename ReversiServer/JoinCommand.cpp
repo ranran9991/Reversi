@@ -4,7 +4,6 @@
  *  Created on: Dec 22, 2017
  *      Author: ranran9991
  */
-
 #include "JoinCommand.h"
 void JoinCommand::execute(vector<string> args) {
 	/*
@@ -20,7 +19,7 @@ void JoinCommand::execute(vector<string> args) {
 		/*f
 		 * Loop for finding socket_sd of the creator of the game
 		 */
-		if(it->first == args[2]/* name of the game */){
+		if(it->first == args[1]/* name of the game */){
 			client1_sd = it->second;
 		}
 	}
@@ -76,7 +75,17 @@ void JoinCommand::execute(vector<string> args) {
 			break;
 		}
 	}
+	/*
+	 * Removing the room from the gameRooms vector
+	 */
 
+	for(vector<pair<string, int> >::iterator it = gameRooms.begin(); it != gameRooms.end(); it++){
+		if(it->first == args[1]){
+			pthread_mutex_lock(&lock);
+			gameRooms.erase(it);
+			pthread_mutex_unlock(&lock);
+		}
+	}
 }
 
 JoinCommand::~JoinCommand() {

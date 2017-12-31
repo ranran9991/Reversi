@@ -102,15 +102,18 @@ void GameServer::start(){
 }
 
 void* GameServer::handleClient(void* socket) {
+	//argument vector for inserting into CommandManager
 	vector<string> args;
 	bool readNextArg = false;
+	bool chooseMoreCommands = true;
 	char buffer[1024];
 	char* token;//for tokenizing the buffer
 	string command;//holds the command (Ex: "start", "join")
 	CommunicationSockets* sock = (CommunicationSockets *)socket;
 	CommandManager com;
 	stringstream ss;
-	while(true){
+	while(chooseMoreCommands){
+		//parsing input from user:
 		ss.str("");
 		ss.clear();
 		ss << sock->clientSocket;
@@ -120,21 +123,19 @@ void* GameServer::handleClient(void* socket) {
 		token = strtok(buffer, " ");
 		//command = the first token in buffer which is the command itself.
 		command = token;
+		token = strtok(NULL, " ");
 		while(token){
-
-			if(command == "join" || command == "start"){
-				//if the command requires taking input from arguments
-				readNextArg = true;
-			}
-			if(readNextArg){
-				//push arguments into the args vector
-				args.push_back(token);
-			}
+			//strtok loop, iterating over input
+			args.push_back(token);
 			token = strtok(NULL, " ");
+		}
+		if(command == "join" or command == "start"){
+			chooseMoreCommands = false;
 		}
 		//execute the command
 		com.executeCommand(command, args);
 		args.clear();
+		readNextArg = false;
 	}
 	return NULL;
 }
