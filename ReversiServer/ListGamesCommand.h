@@ -11,7 +11,7 @@
 
 class ListGamesCommand : public RoomCommand {
 public:
-	void execute (vector <string> args);
+	bool execute (vector <string> args);
 	~ListGamesCommand();
 };
 

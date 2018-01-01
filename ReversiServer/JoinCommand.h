@@ -11,7 +11,7 @@
 #include <pthread.h>
 class JoinCommand : public RoomCommand {
 public:
-	void execute(vector <string>);
+	bool execute(vector <string>);
 	~JoinCommand();
 private:
 	pthread_mutex_t lock;

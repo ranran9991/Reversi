@@ -7,7 +7,7 @@
 
 #include "StartCommand.h"
 pthread_mutex_t lock;
-void StartCommand::execute(vector <string> args) {
+bool StartCommand::execute(vector <string> args) {
 	/*
 	 * Arg 1 = socket_sd of the client
 	 * Arg 2 = game name
@@ -19,7 +19,7 @@ void StartCommand::execute(vector <string> args) {
 			 * Send "-1" to the client if a game with the same name already exists
 			 */
 			write(atoi(args[0].c_str()), "-1", 1024 /* size of set buffer */);
-			return;
+			return true;
 		}
 	}
 	//inserts to the string the pair <name of the game, socket_sd of client
@@ -30,6 +30,7 @@ void StartCommand::execute(vector <string> args) {
 	 * If the creation was successful, write 0;
 	 */
 	write(atoi(args[0].c_str()), "0", 1024 /* size of set buffer */);
+	return false;
 }
 
 StartCommand::~StartCommand() {

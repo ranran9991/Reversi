@@ -13,7 +13,7 @@ class CommandManager {
 public:
 	map <string, Command*> commandsMap;
 	CommandManager();
-	void executeCommand(string command, vector <string> args);
+	bool executeCommand(string command, vector <string> args);
 	~CommandManager();
 };
 

@@ -23,7 +23,7 @@ CommandManager::CommandManager() {
 	commandsMap["join"] = new JoinCommand();
 }
 
-void CommandManager::executeCommand(string command, vector<string> args) {
+bool CommandManager::executeCommand(string command, vector<string> args) {
 	Command* commandObj = commandsMap[command];
-	commandObj->execute(args);
+	return commandObj->execute(args);
 }

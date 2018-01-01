@@ -5,13 +5,13 @@
  *      Author: ranran9991
  */
 #include "JoinCommand.h"
-void JoinCommand::execute(vector<string> args) {
+bool JoinCommand::execute(vector<string> args) {
 	/*
 	 * Arg 1 = client socket_sd
 	 * Arg 2 = name of game to join into
 	 */
 	char buffer[1024];
-	string closeCommand = "close"+args[1];
+	string closeCommand = "close "+args[1];
 	int client1_sd = 0;
 	int client2_sd = atoi(args[0].c_str());
 	vector<pair<string, int> >::iterator it;
@@ -27,15 +27,21 @@ void JoinCommand::execute(vector<string> args) {
 		/*
 		 * If a game that doesn't exist was given as input
 		 */
-		throw "No Such Game";
+		write(client2_sd, "-1", 1024 /* size of set buffer */);
+		return true;
 	}
-	memset(&buffer[0], 0, sizeof(buffer));
+	write(client2_sd, "0", 1024 /* size of set buffer */);
+	for(vector<pair<string, int> >::iterator it = gameRooms.begin(); it != gameRooms.end(); it++){
+		if(it->first == args[1]){
+			pthread_mutex_lock(&lock);
+			gameRooms.erase(it);
+			pthread_mutex_unlock(&lock);
+		}
+	}
 	//Sending 1 to creator client to show him he is the first to enter
-	buffer[0] = '1';
-	write(client1_sd,buffer,sizeof(buffer));
-	buffer[0] = '2';
+	write(client1_sd,"1",sizeof(buffer));
 	//sending 2 to joining client to show him he is the second to enter
-	write(client2_sd,buffer,sizeof(buffer));
+	write(client2_sd,"2",sizeof(buffer));
 	while(true){
 		memset(&buffer[0], 0, sizeof(buffer));
 		//taking input form client 1
@@ -47,7 +53,7 @@ void JoinCommand::execute(vector<string> args) {
 			strcpy(buffer, closeCommand.c_str());
 			write(client2_sd, buffer, sizeof(buffer));
 			close(client2_sd);
-			return;
+			break;
 		}
 		cout<<buffer<<endl;
 		//returning the message
@@ -78,14 +84,7 @@ void JoinCommand::execute(vector<string> args) {
 	/*
 	 * Removing the room from the gameRooms vector
 	 */
-
-	for(vector<pair<string, int> >::iterator it = gameRooms.begin(); it != gameRooms.end(); it++){
-		if(it->first == args[1]){
-			pthread_mutex_lock(&lock);
-			gameRooms.erase(it);
-			pthread_mutex_unlock(&lock);
-		}
-	}
+	return false;
 }
 
 JoinCommand::~JoinCommand() {

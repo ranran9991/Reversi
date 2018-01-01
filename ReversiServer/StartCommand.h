@@ -10,7 +10,7 @@
 #include "RoomCommand.h"
 class StartCommand : public RoomCommand {
 public:
-	void execute(vector <string>);
+	bool execute(vector <string>);
 	virtual ~StartCommand();
 };
 

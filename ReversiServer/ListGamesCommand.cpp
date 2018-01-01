@@ -7,7 +7,7 @@
 
 #include "ListGamesCommand.h"
 #include <cstdlib> //for std::atoi
-void ListGamesCommand::execute(vector<string> args) {
+bool ListGamesCommand::execute(vector<string> args) {
 	/*
 	 * Arg 1 = socket_sd of client
 	 */
@@ -20,6 +20,7 @@ void ListGamesCommand::execute(vector<string> args) {
 		buffer += '\n';
 	}
 	write(socket_sd, buffer.c_str(), 1024/* size of buffer */ );
+	return true;
 }
 
 ListGamesCommand::~ListGamesCommand() {}

@@ -4,24 +4,35 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../ReversiServer/GameServer.cpp 
-
-O_SRCS += \
-../ReversiServer/GameServer.o \
-../ReversiServer/main.o 
+../ReversiServer/Command.cpp \
+../ReversiServer/CommandManager.cpp \
+../ReversiServer/JoinCommand.cpp \
+../ReversiServer/ListGamesCommand.cpp \
+../ReversiServer/RoomCommand.cpp \
+../ReversiServer/StartCommand.cpp 
 
 OBJS += \
-./ReversiServer/GameServer.o 
+./ReversiServer/Command.o \
+./ReversiServer/CommandManager.o \
+./ReversiServer/JoinCommand.o \
+./ReversiServer/ListGamesCommand.o \
+./ReversiServer/RoomCommand.o \
+./ReversiServer/StartCommand.o 
 
 CPP_DEPS += \
-./ReversiServer/GameServer.d 
+./ReversiServer/Command.d \
+./ReversiServer/CommandManager.d \
+./ReversiServer/JoinCommand.d \
+./ReversiServer/ListGamesCommand.d \
+./ReversiServer/RoomCommand.d \
+./ReversiServer/StartCommand.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
 ReversiServer/%.o: ../ReversiServer/%.cpp
 	@echo 'Building file: $<'
 	@echo 'Invoking: GCC C++ Compiler'
-	g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
+	g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o"$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

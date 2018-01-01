@@ -1,4 +1,4 @@
-GameServer.o: ../GameServer.cpp ../GameServer.h ../CommandManager.h \
+GameServer.d: ../GameServer.cpp ../GameServer.h ../CommandManager.h \
  ../Command.h
 
 ../GameServer.h:

@@ -104,7 +104,6 @@ void GameServer::start(){
 void* GameServer::handleClient(void* socket) {
 	//argument vector for inserting into CommandManager
 	vector<string> args;
-	bool readNextArg = false;
 	bool chooseMoreCommands = true;
 	char buffer[1024];
 	char* token;//for tokenizing the buffer
@@ -118,24 +117,25 @@ void* GameServer::handleClient(void* socket) {
 		ss.clear();
 		ss << sock->clientSocket;
 		args.push_back(ss.str()); //every command needs the socket_id of the client
+		cout << "wait" << endl;
 		read(sock->clientSocket, buffer, sizeof(buffer));
+		cout << "read " << buffer << endl;
 		//tokenizing the string
 		token = strtok(buffer, " ");
+		cout << token << endl;
 		//command = the first token in buffer which is the command itself.
 		command = token;
 		token = strtok(NULL, " ");
 		while(token){
 			//strtok loop, iterating over input
 			args.push_back(token);
+			cout << token << endl;
 			token = strtok(NULL, " ");
 		}
-		if(command == "join" or command == "start"){
-			chooseMoreCommands = false;
-		}
 		//execute the command
-		com.executeCommand(command, args);
+		chooseMoreCommands = com.executeCommand(command, args);
+		cout << chooseMoreCommands << endl;
 		args.clear();
-		readNextArg = false;
 	}
 	return NULL;
 }

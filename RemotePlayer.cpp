@@ -15,7 +15,12 @@
 RemotePlayer::RemotePlayer(char* fileName, bool *first) :
 		Player(), clientSocket(0) {
 	//getting ip and port from file
+	int n;
+	int option;
+	bool sendCommands = true;
 	string buf;
+	string name;
+	ostringstream os;
 	ifstream config;
 	config.open(fileName);
 	if(!config){
@@ -54,18 +59,93 @@ RemotePlayer::RemotePlayer(char* fileName, bool *first) :
 	if(connect(clientSocket, (struct sockaddr*)&serverAddress, sizeof(serverAddress)) == -1) {
 		throw "Error connecting to server";
 	}
-	cout <<	"Connected to server" << endl;
-	int n = read(clientSocket, buffer, BUFFER_SIZE_);
+	cout << "Connected to server\n\n";
+	while (sendCommands) {
+		cout <<
+				"Choose an option\n\n" <<
+				"    1. Print list of existing games\n" <<
+				"    2. Create a new game\n" <<
+				"    3. Join an existing game\n\n";
+		cin >> option;
+		cout << endl;
+		// while an invalid input is received
+		while (option < 1 || option > 3) {
+			// print a message and the menu
+			cout <<
+					"Invalid option\n"
+					"Choose an option\n\n" <<
+					"    1. Print list of existing games\n" <<
+					"    2. Create a new game\n" <<
+					"    3. Join an existing game\n\n";
+			cin >> option;
+			cout << endl;
+		}
+		os.str("");
+		os.clear();
+		switch (option){
+		case 1:
+			strcpy(buffer, "list_games");
+			n = write(clientSocket, buffer, BUFFER_SIZE_);
+			if (n == -1) {
+				throw "Error writing to socket";
+			}
+			n = read(clientSocket, buffer, BUFFER_SIZE_);
+			if (n == -1) {
+				throw "Error reading from socket";
+			}
+			cout << buffer << endl;
+			break;
+		case 2:
+			cout << "Enter name of the new game: ";
+			cin >> name;
+			cout << endl;
+			os << "start " << name << '\0';
+			n = write(clientSocket, os.str().c_str(), BUFFER_SIZE_);
+			if (n == -1) {
+				throw "Error writing to socket";
+			}
+			n = read(clientSocket, buffer, BUFFER_SIZE_);
+			if (n == -1) {
+				throw "Error reading from socket";
+			}
+			if (buffer[0] == '0') {
+				cout << "Game created successfully\n\n";
+				sendCommands = false;
+				cout << "Waiting for other player to join...\n\n";
+			}
+			else cout << "A game with the same name already exists\n\n";
+			cout << buffer << endl;
+			break;
+		case 3:
+			cout << "Enter name of the game you want to join: ";
+			cin >> name;
+			cout << endl;
+			os << "join " << name << '\0';
+			n = write(clientSocket, os.str().c_str(), BUFFER_SIZE_);
+			if (n == -1) {
+				throw "Error writing to socket";
+			}
+			n = read(clientSocket, buffer, BUFFER_SIZE_);
+			if (n == -1) {
+				throw "Error reading from socket";
+			}
+			if (buffer[0] == '0') {
+				cout << "Joined to game successfully\n\n";
+				sendCommands = false;
+			}
+			else cout << "No game with this name exists\n\n";;
+			cout << buffer << endl;
+			break;
+		default:
+			cout << "this was not supposed to happen\n\n";
+		}
+	}
+	n = read(clientSocket, buffer, BUFFER_SIZE_);
 	if (n == -1) {
 		throw "Error reading from socket";
 	}
+	cout << buffer << endl;
 	if (buffer[0] == '1') {
-		cout << "Waiting for other player to join...\n\n";
-		memset(buffer, '\0', BUFFER_SIZE_);
-		n = read(clientSocket, buffer, BUFFER_SIZE_);
-		if (n == -1) {
-			throw "Error reading from socket";
-		}
 		*first = true;
 		this->first = false;
 	}
