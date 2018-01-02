@@ -27,10 +27,13 @@ bool JoinCommand::execute(vector<string> args) {
 		/*
 		 * If a game that doesn't exist was given as input
 		 */
-		write(client2_sd, "-1", 1024 /* size of set buffer */);
+		buffer[0] = '-';
+		buffer[1] = '1';
+		write(client2_sd, buffer, 1024 /* size of set buffer */);
 		return true;
 	}
-	write(client2_sd, "0", 1024 /* size of set buffer */);
+	buffer[0] = '0';
+	write(client2_sd, buffer, 1024 /* size of set buffer */);
 	for(vector<pair<string, int> >::iterator it = gameRooms.begin(); it != gameRooms.end(); it++){
 		if(it->first == args[1]){
 			pthread_mutex_lock(&lock);
@@ -39,9 +42,8 @@ bool JoinCommand::execute(vector<string> args) {
 		}
 	}
 	//Sending 1 to creator client to show him he is the first to enter
-	write(client1_sd,"1",sizeof(buffer));
-	//sending 2 to joining client to show him he is the second to enter
-	write(client2_sd,"2",sizeof(buffer));
+	memset(&buffer[0], 0, sizeof(buffer));
+	//write(client1_sd, buffer, 1024 /* size of set buffer */);
 	while(true){
 		memset(&buffer[0], 0, sizeof(buffer));
 		//taking input form client 1

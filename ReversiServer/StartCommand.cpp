@@ -12,13 +12,16 @@ bool StartCommand::execute(vector <string> args) {
 	 * Arg 1 = socket_sd of the client
 	 * Arg 2 = game name
 	 */
+	char buffer[1024];
 	vector<pair<string, int> >::iterator it;
 	for (it = gameRooms.begin(); it !=gameRooms.end(); it++ ){
 		if(it->first == args[1]){
 			/*
 			 * Send "-1" to the client if a game with the same name already exists
 			 */
-			write(atoi(args[0].c_str()), "-1", 1024 /* size of set buffer */);
+			buffer[0] = '-';
+			buffer[1] = '1';
+			write(atoi(args[0].c_str()), buffer, 1024 /* size of set buffer */);
 			return true;
 		}
 	}
@@ -29,7 +32,8 @@ bool StartCommand::execute(vector <string> args) {
 	/*
 	 * If the creation was successful, write 0;
 	 */
-	write(atoi(args[0].c_str()), "0", 1024 /* size of set buffer */);
+	buffer[0] = '0';
+	write(atoi(args[0].c_str()), buffer, 1024 /* size of set buffer */);
 	return false;
 }
 

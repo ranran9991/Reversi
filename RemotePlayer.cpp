@@ -112,6 +112,9 @@ RemotePlayer::RemotePlayer(char* fileName, bool *first) :
 				cout << "Game created successfully\n\n";
 				sendCommands = false;
 				cout << "Waiting for other player to join...\n\n";
+				*first = true;
+				this->first = false;
+				read(clientSocket, buffer, BUFFER_SIZE_);
 			}
 			else cout << "A game with the same name already exists\n\n";
 			cout << buffer << endl;
@@ -132,6 +135,8 @@ RemotePlayer::RemotePlayer(char* fileName, bool *first) :
 			if (buffer[0] == '0') {
 				cout << "Joined to game successfully\n\n";
 				sendCommands = false;
+				*first = false;
+				this->first = true;
 			}
 			else cout << "No game with this name exists\n\n";;
 			cout << buffer << endl;
@@ -139,19 +144,6 @@ RemotePlayer::RemotePlayer(char* fileName, bool *first) :
 		default:
 			cout << "this was not supposed to happen\n\n";
 		}
-	}
-	n = read(clientSocket, buffer, BUFFER_SIZE_);
-	if (n == -1) {
-		throw "Error reading from socket";
-	}
-	cout << buffer << endl;
-	if (buffer[0] == '1') {
-		*first = true;
-		this->first = false;
-	}
-	else {
-		*first = false;
-		this->first = true;
 	}
 }
 

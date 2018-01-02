@@ -104,6 +104,7 @@ void GameServer::start(){
 void* GameServer::handleClient(void* socket) {
 	//argument vector for inserting into CommandManager
 	vector<string> args;
+	int i; /////////////////////////////////////////////////////////////////////////////
 	bool chooseMoreCommands = true;
 	char buffer[1024];
 	char* token;//for tokenizing the buffer

@@ -16,7 +16,7 @@ int main(){
 	server.start();
 	}
 	catch(const char* temp){
-		cout<<temp;
+		cout<<temp<<endl;
 		server.stop();
 	}
 	return 0;
