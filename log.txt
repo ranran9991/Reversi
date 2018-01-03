@@ -1,3 +1,100 @@
+commit 85a719d9dfd1c82a9b5434a2f9d7e98b3c27338b
+Author: Ron Edi <ronedi62@gmail.com>
+Date:   Wed Jan 3 22:26:24 2018 +0200
+
+    Documentation added to RemotePlayer
+
+commit ca59c47d856c59b6d9e140fa6ea5b4be0745a9e0
+Author: Ron Edi <ronedi62@gmail.com>
+Date:   Wed Jan 3 22:00:00 2018 +0200
+
+    Changed Room to GameRoom
+
+commit 98db968652c1f332003c16fa49297eca23a9fc83
+Author: Ron Edi <ronedi62@gmail.com>
+Date:   Wed Jan 3 21:35:08 2018 +0200
+
+    All fixed
+
+commit c4655ec9bbeb66d9ad357f4e5257d5050395aaac
+Author: Ran <ranran9991@gmail.com>
+Date:   Wed Jan 3 15:08:36 2018 +0200
+
+    fixed bug with join
+
+commit 3dc0038a24eb674a389dc38d91a6190de383d2d1
+Author: Ron Edi <ronedi62@gmail.com>
+Date:   Tue Jan 2 22:35:32 2018 +0200
+
+    more changes in client
+
+commit 3a6a42f616542072b0906a984c00e9a39b2ff424
+Author: ranran9991 <ranran9991@gmail.com>
+Date:   Tue Jan 2 17:14:23 2018 +0200
+
+    Added Command and CommandManager support
+
+commit df10c7f7961080e7975470e26c56cb73e9ea0866
+Author: Ron Edi <ronedi62@gmail.com>
+Date:   Mon Jan 1 11:30:04 2018 +0200
+
+    client menu modified
+
+commit d9fff56887ef7fba6252c7b5a003d7f41f94789b
+Author: Ran <ranran9991@gmail.com>
+Date:   Sun Dec 31 09:00:50 2017 +0200
+
+    fixed bugs with gameRooms vector
+
+commit c689813faf6acb20d1df4e236ba29c8118a8cade
+Author: Ran <ranran9991@gmail.com>
+Date:   Tue Dec 26 16:04:57 2017 +0200
+
+    fixed bug with exit thread
+
+commit 4f077dd8ac2b48471fa68d9b859f453b57ea7014
+Author: Ran <ranran9991@gmail.com>
+Date:   Tue Dec 26 15:24:34 2017 +0200
+
+    Added Command support
+
+commit 5aa0a8a2733ac270528bed99fad461e99082df2c
+Author: Ran <ranran9991@gmail.com>
+Date:   Wed Dec 20 09:53:59 2017 +0200
+
+    Removed warning at Game.cpp
+
+commit 9cb0fc9a6b96770bf49135ae69d6bfa3f5acff25
+Author: Ron Edi <ronedi62@gmail.com>
+Date:   Sun Dec 10 23:35:15 2017 +0200
+
+    yes
+
+commit b55f9250c4d0b3547052ff5bb671578392584dd6
+Merge: d5ce45f 30da2af
+Author: Ron Edi <ronedi62@gmail.com>
+Date:   Sun Dec 10 23:33:07 2017 +0200
+
+    yes
+
+commit d5ce45f5db2ed74fde531157bb06dfe3b3138b43
+Author: Ron Edi <ronedi62@gmail.com>
+Date:   Sun Dec 10 23:30:50 2017 +0200
+
+    NoMove modified
+
+commit 30da2afb74b439646c60c0e3573c6837cd666c8a
+Author: Ran Elgiser <ranran9991@gmail.com>
+Date:   Sun Dec 10 20:42:10 2017 +0200
+
+    Final ex5
+
+commit 01b5c6167da513d128271fc07cb02416192ef88d
+Author: Ron Edi <ronedi62@gmail.com>
+Date:   Sun Dec 10 20:21:53 2017 +0200
+
+    last move added
+
 commit 1d368cb61c40baafe19740205aa5aa9ab8407234
 Author: ranran9991 <ranran9991@gmail.com>
 Date:   Sat Dec 9 20:06:47 2017 +0200
