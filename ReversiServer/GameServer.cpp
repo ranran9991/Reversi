@@ -91,6 +91,7 @@ void GameServer::start(){
 		client1_sd = accept(serverSocket,
 					(struct sockaddr* )&client1Address,
 				 	 &client1AddressLen);
+		cout<< client1_sd;
 		//pushing the client into the client vector
 		clientList.push_back(client1_sd);
 		sock.clientSocket = client1_sd;
@@ -104,7 +105,6 @@ void GameServer::start(){
 void* GameServer::handleClient(void* socket) {
 	//argument vector for inserting into CommandManager
 	vector<string> args;
-	int i; /////////////////////////////////////////////////////////////////////////////
 	bool chooseMoreCommands = true;
 	char buffer[1024];
 	char* token;//for tokenizing the buffer
@@ -142,7 +142,7 @@ void* GameServer::handleClient(void* socket) {
 }
 
 void GameServer::stop() {
-	char end[] = "End";
+	char end[1024 /*size of buffer*/] = "End";
 	for(vector<int>::iterator it = clientList.begin(); it!=clientList.end(); it++){
 		write(*it, end, 1024 /*size of buffer*/);
 		close(*it);

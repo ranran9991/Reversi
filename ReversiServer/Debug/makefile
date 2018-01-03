@@ -43,7 +43,7 @@ all: ReversiServer
 ReversiServer: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GCC C++ Linker'
-	g++  -o"ReversiServer" $(OBJS) $(USER_OBJS) $(LIBS)
+	g++  -o "ReversiServer" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -53,6 +53,5 @@ clean:
 	-@echo ' '
 
 .PHONY: all clean dependents
-.SECONDARY:
 
 -include ../makefile.targets

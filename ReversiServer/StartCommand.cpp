@@ -13,6 +13,7 @@ bool StartCommand::execute(vector <string> args) {
 	 * Arg 2 = game name
 	 */
 	char buffer[1024];
+	memset(buffer, '\0', 1024);
 	vector<pair<string, int> >::iterator it;
 	for (it = gameRooms.begin(); it !=gameRooms.end(); it++ ){
 		if(it->first == args[1]){

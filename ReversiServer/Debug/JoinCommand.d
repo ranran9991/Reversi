@@ -1,4 +1,4 @@
-JoinCommand.d: ../JoinCommand.cpp ../JoinCommand.h ../RoomCommand.h \
+JoinCommand.o: ../JoinCommand.cpp ../JoinCommand.h ../RoomCommand.h \
  ../Command.h
 
 ../JoinCommand.h:

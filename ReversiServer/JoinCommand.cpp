@@ -11,18 +11,21 @@ bool JoinCommand::execute(vector<string> args) {
 	 * Arg 2 = name of game to join into
 	 */
 	char buffer[1024];
+	//reseting buffer :)
+	memset(&buffer[0], 0, sizeof(buffer));
 	string closeCommand = "close "+args[1];
 	int client1_sd = 0;
 	int client2_sd = atoi(args[0].c_str());
 	vector<pair<string, int> >::iterator it;
 	for(it = RoomCommand::gameRooms.begin(); it != RoomCommand::gameRooms.end(); it++){
-		/*f
+		/*
 		 * Loop for finding socket_sd of the creator of the game
 		 */
 		if(it->first == args[1]/* name of the game */){
 			client1_sd = it->second;
 		}
 	}
+	cout<<"Join: "<<client1_sd<<' '<<client2_sd<<endl;
 	if(client1_sd == 0){
 		/*
 		 * If a game that doesn't exist was given as input
@@ -34,20 +37,24 @@ bool JoinCommand::execute(vector<string> args) {
 	}
 	buffer[0] = '0';
 	write(client2_sd, buffer, 1024 /* size of set buffer */);
-	for(vector<pair<string, int> >::iterator it = gameRooms.begin(); it != gameRooms.end(); it++){
+	/*
+	 * Removing the room from the gameRooms vector
+	 */
+	/*for(vector<pair<string, int> >::iterator it = gameRooms.begin(); it != gameRooms.end(); it++){
 		if(it->first == args[1]){
 			pthread_mutex_lock(&lock);
 			gameRooms.erase(it);
 			pthread_mutex_unlock(&lock);
 		}
-	}
+	}*/
 	//Sending 1 to creator client to show him he is the first to enter
 	memset(&buffer[0], 0, sizeof(buffer));
-	//write(client1_sd, buffer, 1024 /* size of set buffer */);
+	buffer[0] = '0';
+	write(client1_sd, buffer, 1024 /* size of set buffer */);
 	while(true){
 		memset(&buffer[0], 0, sizeof(buffer));
 		//taking input form client 1
-		if(read(client1_sd, buffer, sizeof(buffer))<=0 || !strcmp(buffer, closeCommand.c_str())) {
+		if(read(client1_sd, buffer, sizeof(buffer))<0 || !strcmp(buffer, closeCommand.c_str())) {
 			close(client1_sd);
 			//Writing to the second client that the game is over
 			memset(&buffer[0], 0, sizeof(buffer));
@@ -66,12 +73,13 @@ bool JoinCommand::execute(vector<string> args) {
 		}
 		memset(&buffer[0], 0, sizeof(buffer));
 		//taking input from client 2
-		if(read(client2_sd, buffer, sizeof(buffer))<=0 || !strcmp(buffer, closeCommand.c_str())){
+		if(read(client2_sd, buffer, sizeof(buffer))<0 || !strcmp(buffer, closeCommand.c_str())){
 			memset(&buffer[0], 0, sizeof(buffer));
 			//Writing to the second client that the game is over
 			close(client1_sd);
 			//buffer will have "close + <name of room>"
 			strcpy(buffer, closeCommand.c_str());
+			write(client1_sd, buffer, sizeof(buffer));
 			close(client2_sd);
 			break;
 		}
@@ -83,9 +91,6 @@ bool JoinCommand::execute(vector<string> args) {
 			break;
 		}
 	}
-	/*
-	 * Removing the room from the gameRooms vector
-	 */
 	return false;
 }
 

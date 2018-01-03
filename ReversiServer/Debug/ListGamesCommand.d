@@ -1,4 +1,4 @@
-ListGamesCommand.d: ../ListGamesCommand.cpp ../ListGamesCommand.h \
+ListGamesCommand.o: ../ListGamesCommand.cpp ../ListGamesCommand.h \
  ../RoomCommand.h ../Command.h
 
 ../ListGamesCommand.h:

@@ -1,4 +1,4 @@
-ReversiServer/StartCommand.d: ../ReversiServer/StartCommand.cpp \
+ReversiServer/StartCommand.o: ../ReversiServer/StartCommand.cpp \
  ../ReversiServer/StartCommand.h ../ReversiServer/RoomCommand.h \
  ../ReversiServer/Command.h
 

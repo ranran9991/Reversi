@@ -13,7 +13,7 @@
 CommandManager::~CommandManager() {
 	map<string, Command *>::iterator it;
 	for(it = commandsMap.begin(); it != commandsMap.end(); it++){
-		delete it->second;
+		//delete it->second;
 	}
 }
 

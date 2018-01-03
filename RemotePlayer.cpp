@@ -84,6 +84,7 @@ RemotePlayer::RemotePlayer(char* fileName, bool *first) :
 		os.clear();
 		switch (option){
 		case 1:
+			memset(buffer, '\0', BUFFER_SIZE_);
 			strcpy(buffer, "list_games");
 			n = write(clientSocket, buffer, BUFFER_SIZE_);
 			if (n == -1) {
@@ -100,7 +101,9 @@ RemotePlayer::RemotePlayer(char* fileName, bool *first) :
 			cin >> name;
 			cout << endl;
 			os << "start " << name << '\0';
-			n = write(clientSocket, os.str().c_str(), BUFFER_SIZE_);
+			memset(buffer, '\0', BUFFER_SIZE_);
+			strcpy(buffer, os.str().c_str());
+			n = write(clientSocket, buffer, BUFFER_SIZE_);
 			if (n == -1) {
 				throw "Error writing to socket";
 			}
@@ -124,10 +127,13 @@ RemotePlayer::RemotePlayer(char* fileName, bool *first) :
 			cin >> name;
 			cout << endl;
 			os << "join " << name << '\0';
-			n = write(clientSocket, os.str().c_str(), BUFFER_SIZE_);
+			memset(buffer, '\0', BUFFER_SIZE_);
+			strcpy(buffer, os.str().c_str());
+			n = write(clientSocket, buffer, BUFFER_SIZE_);
 			if (n == -1) {
 				throw "Error writing to socket";
 			}
+			memset(buffer, '\0', BUFFER_SIZE_);
 			n = read(clientSocket, buffer, BUFFER_SIZE_);
 			if (n == -1) {
 				throw "Error reading from socket";
