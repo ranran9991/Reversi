@@ -14,7 +14,7 @@ bool StartCommand::execute(vector <string> args) {
 	 */
 	char buffer[1024];
 	memset(buffer, '\0', 1024);
-	vector<Room>::iterator it;
+	vector<GameRoom>::iterator it;
 	for (it = gameRooms.begin(); it !=gameRooms.end(); it++ ){
 		if(it->name == args[1] && it->wait){
 			/*
@@ -28,7 +28,7 @@ bool StartCommand::execute(vector <string> args) {
 	}
 	//inserts to the string the pair <name of the game, socket_sd of client
 	pthread_mutex_lock(&lock);
-	RoomCommand::gameRooms.push_back(Room(args[1],atoi(args[0].c_str()),true));
+	RoomCommand::gameRooms.push_back(GameRoom(args[1],atoi(args[0].c_str()),true));
 	pthread_mutex_unlock(&lock);
 	/*
 	 * If the creation was successful, write 0;

@@ -9,6 +9,7 @@ O_SRCS += \
 ../ReversiServer/Debug/GameServer.o \
 ../ReversiServer/Debug/JoinCommand.o \
 ../ReversiServer/Debug/ListGamesCommand.o \
+../ReversiServer/Debug/Room.o \
 ../ReversiServer/Debug/RoomCommand.o \
 ../ReversiServer/Debug/StartCommand.o \
 ../ReversiServer/Debug/main.o 

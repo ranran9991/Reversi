@@ -1,7 +1,8 @@
-RoomCommand.d: ../RoomCommand.cpp ../RoomCommand.h ../Command.h ../Room.h
+RoomCommand.d: ../RoomCommand.cpp ../RoomCommand.h ../Command.h \
+ ../GameRoom.h
 
 ../RoomCommand.h:
 
 ../Command.h:
 
-../Room.h:
+../GameRoom.h:

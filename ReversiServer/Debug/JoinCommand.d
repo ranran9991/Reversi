@@ -1,5 +1,5 @@
 JoinCommand.d: ../JoinCommand.cpp ../JoinCommand.h ../RoomCommand.h \
- ../Command.h ../Room.h
+ ../Command.h ../GameRoom.h
 
 ../JoinCommand.h:
 
@@ -7,4 +7,4 @@ JoinCommand.d: ../JoinCommand.cpp ../JoinCommand.h ../RoomCommand.h \
 
 ../Command.h:
 
-../Room.h:
+../GameRoom.h:

@@ -6,10 +6,10 @@
 CPP_SRCS += \
 ../Command.cpp \
 ../CommandManager.cpp \
+../GameRoom.cpp \
 ../GameServer.cpp \
 ../JoinCommand.cpp \
 ../ListGamesCommand.cpp \
-../Room.cpp \
 ../RoomCommand.cpp \
 ../StartCommand.cpp \
 ../main.cpp 
@@ -17,10 +17,10 @@ CPP_SRCS += \
 OBJS += \
 ./Command.o \
 ./CommandManager.o \
+./GameRoom.o \
 ./GameServer.o \
 ./JoinCommand.o \
 ./ListGamesCommand.o \
-./Room.o \
 ./RoomCommand.o \
 ./StartCommand.o \
 ./main.o 
@@ -28,10 +28,10 @@ OBJS += \
 CPP_DEPS += \
 ./Command.d \
 ./CommandManager.d \
+./GameRoom.d \
 ./GameServer.d \
 ./JoinCommand.d \
 ./ListGamesCommand.d \
-./Room.d \
 ./RoomCommand.d \
 ./StartCommand.d \
 ./main.d 

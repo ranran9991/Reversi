@@ -1,5 +1,5 @@
 ListGamesCommand.d: ../ListGamesCommand.cpp ../ListGamesCommand.h \
- ../RoomCommand.h ../Command.h ../Room.h
+ ../RoomCommand.h ../Command.h ../GameRoom.h
 
 ../ListGamesCommand.h:
 
@@ -7,4 +7,4 @@ ListGamesCommand.d: ../ListGamesCommand.cpp ../ListGamesCommand.h \
 
 ../Command.h:
 
-../Room.h:
+../GameRoom.h:

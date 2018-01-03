@@ -16,7 +16,7 @@ bool JoinCommand::execute(vector<string> args) {
 	string closeCommand = "close "+args[1];
 	int client1_sd = 0;
 	int client2_sd = atoi(args[0].c_str());
-	vector<Room>::iterator it;
+	vector<GameRoom>::iterator it;
 	for(it = RoomCommand::gameRooms.begin(); it != RoomCommand::gameRooms.end(); it++){
 		/*
 		 * Loop for finding socket_sd of the creator of the game

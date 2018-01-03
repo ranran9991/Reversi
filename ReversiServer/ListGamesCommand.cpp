@@ -13,7 +13,7 @@ bool ListGamesCommand::execute(vector<string> args) {
 	 */
 	int socket_sd = atoi(args[0].c_str());
 	int gameCounter = 0;
-	vector <Room>::iterator i;
+	vector <GameRoom>::iterator i;
 	string buffer = "Available games: \n";
 	for (i = RoomCommand::gameRooms.begin(); i != RoomCommand::gameRooms.end(); i++){
 		if (i->wait) {

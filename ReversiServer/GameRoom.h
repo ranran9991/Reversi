@@ -1,25 +1,25 @@
 /*
- * Room.h
+ * GameRoom.h
  *
  *  Created on: Jan 3, 2018
  *      Author: ron
  */
 
-#ifndef ROOM_H_
-#define ROOM_H_
+#ifndef GAMEROOM_H_
+#define GAMEROOM_H_
 #include <string>
 using namespace std;
 
-class Room {
+class GameRoom {
 private:
 
 public:
-	Room();
-	Room(string, int, bool);
+	GameRoom();
+	GameRoom(string, int, bool);
 	string name;
 	int id;
 	bool wait;
-	~Room();
+	~GameRoom();
 };
 
-#endif /* ROOM_H_ */
+#endif /* GAMEROOM_H_ */

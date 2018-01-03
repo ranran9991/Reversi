@@ -1,5 +1,5 @@
 CommandManager.d: ../CommandManager.cpp ../CommandManager.h ../Command.h \
- ../ListGamesCommand.h ../RoomCommand.h ../Room.h ../JoinCommand.h \
+ ../ListGamesCommand.h ../RoomCommand.h ../GameRoom.h ../JoinCommand.h \
  ../StartCommand.h
 
 ../CommandManager.h:
@@ -10,7 +10,7 @@ CommandManager.d: ../CommandManager.cpp ../CommandManager.h ../Command.h \
 
 ../RoomCommand.h:
 
-../Room.h:
+../GameRoom.h:
 
 ../JoinCommand.h:
 

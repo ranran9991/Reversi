@@ -1,5 +1,5 @@
 StartCommand.d: ../StartCommand.cpp ../StartCommand.h ../RoomCommand.h \
- ../Command.h ../Room.h
+ ../Command.h ../GameRoom.h
 
 ../StartCommand.h:
 
@@ -7,4 +7,4 @@ StartCommand.d: ../StartCommand.cpp ../StartCommand.h ../RoomCommand.h \
 
 ../Command.h:
 
-../Room.h:
+../GameRoom.h:
