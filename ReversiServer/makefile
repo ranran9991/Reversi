@@ -1,5 +1,5 @@
-a.out: main.o GameServer.o CommandManager.o Command.o RoomCommand.o JoinCommand.o ListGamesCommand.o StartCommand.o
-	g++ -pthread -o ReversiServer main.o GameServer.o CommandManager.o Command.o RoomCommand.o JoinCommand.o ListGamesCommand.o StartCommand.o
+a.out: main.o GameServer.o CommandManager.o Command.o RoomCommand.o JoinCommand.o ListGamesCommand.o StartCommand.o GameRoom.o
+	g++ -pthread -o ReversiServer main.o GameServer.o CommandManager.o Command.o RoomCommand.o JoinCommand.o ListGamesCommand.o  StartCommand.o GameRoom.o
 
 main.o: main.cpp GameServer.h
 	g++ -c main.cpp
@@ -24,3 +24,6 @@ ListGamesCommand.o: ListGamesCommand.cpp ListGamesCommand.h
 	
 StartCommand.o: StartCommand.cpp StartCommand.h
 	g++ -c StartCommand.cpp
+
+GameRoom.o: GameRoom.cpp GameRoom.h
+	g++ -c GameRoom.cpp

@@ -61,12 +61,13 @@ RemotePlayer::RemotePlayer(char* fileName, bool *first) :
 	}
 	cout << "Connected to server\n\n";
 	while (sendCommands) {
+		// print the remote player menu
 		cout <<
 				"Choose an option\n\n" <<
 				"    1. Print list of existing games\n" <<
 				"    2. Create a new game\n" <<
 				"    3. Join an existing game\n\n";
-		cin >> option;
+		cin >> option; // scan the option
 		cout << endl;
 		// while an invalid input is received
 		while (option < 1 || option > 3) {
@@ -77,73 +78,82 @@ RemotePlayer::RemotePlayer(char* fileName, bool *first) :
 					"    1. Print list of existing games\n" <<
 					"    2. Create a new game\n" <<
 					"    3. Join an existing game\n\n";
-			cin >> option;
+			cin >> option; // scan the option
 			cout << endl;
 		}
 		os.str("");
 		os.clear();
 		switch (option){
-		case 1:
+		case 1: // print the list of existing games
 			memset(buffer, '\0', BUFFER_SIZE_);
 			strcpy(buffer, "list_games");
+			// send command to server
 			n = write(clientSocket, buffer, BUFFER_SIZE_);
 			if (n == -1) {
 				throw "Error writing to socket";
 			}
+			// read the list from the server
 			n = read(clientSocket, buffer, BUFFER_SIZE_);
 			if (n == -1) {
 				throw "Error reading from socket";
 			}
+			// print the lists
 			cout << buffer << endl;
 			break;
-		case 2:
+		case 2: // create a new game
 			cout << "Enter name of the new game: ";
-			cin >> name;
+			cin >> name; // scan the name for the game
 			cout << endl;
 			os << "start " << name << '\0';
 			memset(buffer, '\0', BUFFER_SIZE_);
 			strcpy(buffer, os.str().c_str());
+			// send start command to server with the name
 			n = write(clientSocket, buffer, BUFFER_SIZE_);
 			if (n == -1) {
 				throw "Error writing to socket";
 			}
+			// read whether the creation was successful or not
 			n = read(clientSocket, buffer, BUFFER_SIZE_);
 			if (n == -1) {
 				throw "Error reading from socket";
 			}
-			if (buffer[0] == '0') {
-				cout << "Game created successfully\n\n";
-				sendCommands = false;
+			if (buffer[0] == '0') { // if no such game exists
+				cout << "Game created successfully\n\n"; // print a message
+				sendCommands = false; // exit the loop afterwards
 				cout << "Waiting for other player to join...\n\n";
-				*first = true;
-				this->first = false;
-				read(clientSocket, buffer, BUFFER_SIZE_);
+				*first = true; // creator set to be first to play
+				this->first = false; // should write to server in first move
+				read(clientSocket, buffer, BUFFER_SIZE_); // wait for a message from server
 			}
+			// else print an error message
 			else cout << "A game with the same name already exists\n\n";
 			break;
 		case 3:
 			cout << "Enter name of the game you want to join: ";
-			cin >> name;
+			cin >> name; // scan the name for the game
 			cout << endl;
 			os << "join " << name << '\0';
 			memset(buffer, '\0', BUFFER_SIZE_);
 			strcpy(buffer, os.str().c_str());
+			// send join command to server with the name
 			n = write(clientSocket, buffer, BUFFER_SIZE_);
 			if (n == -1) {
 				throw "Error writing to socket";
 			}
 			memset(buffer, '\0', BUFFER_SIZE_);
+			// read whether the joining was successful or not
 			n = read(clientSocket, buffer, BUFFER_SIZE_);
 			if (n == -1) {
 				throw "Error reading from socket";
 			}
-			if (buffer[0] == '0') {
+			if (buffer[0] == '0') { // if this game exists
 				cout << "Joined to game successfully\n\n";
-				sendCommands = false;
-				*first = false;
-				this->first = true;
+				sendCommands = false; // exit the loop afterwards
+				*first = false; // joiner set to be second to play
+				this->first = true; // should not write to server in fisrt move
 			}
-			else cout << "No game with this name exists\n\n";;
+			// else print an error message
+			else cout << "No game with this name exists\n\n";
 			break;
 		default:
 			cout << "this was not supposed to happen\n\n";
@@ -154,6 +164,9 @@ RemotePlayer::RemotePlayer(char* fileName, bool *first) :
 void RemotePlayer::MakeMove() {
 	int n;
 	cout << "Current board:\n\n" << *board <<"\nWaiting for other player's move...\n\n";
+	/* this check is relevant only for the first move of the second player,
+	 * because there is no message to write to the server
+	 */
 	if (!first) {
 		ostringstream os;
 		if (board->GetLastMove().first != 0)

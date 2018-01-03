@@ -1,8 +1,13 @@
 /*
- * GameRoom.cpp
+ * Board.h
  *
- *  Created on: Jan 3, 2018
- *      Author: ron
+ *  Ron Edi
+ *  ID: 322956897
+ *  Exercise Group: 05
+ *
+ *  Ran Elgiser
+ *  ID: 322768805
+ *  Exercise Grope: 05
  */
 
 #include "GameRoom.h"
