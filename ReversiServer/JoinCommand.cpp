@@ -16,16 +16,17 @@ bool JoinCommand::execute(vector<string> args) {
 	string closeCommand = "close "+args[1];
 	int client1_sd = 0;
 	int client2_sd = atoi(args[0].c_str());
-	vector<pair<string, int> >::iterator it;
+	vector<Room>::iterator it;
 	for(it = RoomCommand::gameRooms.begin(); it != RoomCommand::gameRooms.end(); it++){
 		/*
 		 * Loop for finding socket_sd of the creator of the game
 		 */
-		if(it->first == args[1]/* name of the game */){
-			client1_sd = it->second;
+		if(it->name == args[1]/* name of the game */ && it->wait){
+			client1_sd = it->id;
+			it->wait = false;
+			break;
 		}
 	}
-	cout<<"Join: "<<client1_sd<<' '<<client2_sd<<endl;
 	if(client1_sd == 0){
 		/*
 		 * If a game that doesn't exist was given as input
@@ -40,14 +41,7 @@ bool JoinCommand::execute(vector<string> args) {
 	/*
 	 * Removing the room from the gameRooms vector
 	 */
-	/*for(vector<pair<string, int> >::iterator it = gameRooms.begin(); it != gameRooms.end(); it++){
-		if(it->first == args[1]){
-			pthread_mutex_lock(&lock);
-			gameRooms.erase(it);
-			pthread_mutex_unlock(&lock);
-		}
-	}*/
-	//Sending 1 to creator client to show him he is the first to enter
+	// Sending 1 to creator client to show him he is the first to enter
 	memset(&buffer[0], 0, sizeof(buffer));
 	buffer[0] = '0';
 	write(client1_sd, buffer, 1024 /* size of set buffer */);
@@ -91,8 +85,15 @@ bool JoinCommand::execute(vector<string> args) {
 			break;
 		}
 	}
+	for(it = RoomCommand::gameRooms.begin(); it != RoomCommand::gameRooms.end(); it++){
+		if(it->name == args[1] && it->wait){
+			pthread_mutex_lock(&lock);
+			gameRooms.erase(it);
+			pthread_mutex_unlock(&lock);
+			break;
+		}
+	}
 	return false;
 }
 
-JoinCommand::~JoinCommand() {
-}
+JoinCommand::~JoinCommand() { }

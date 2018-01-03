@@ -91,7 +91,6 @@ void GameServer::start(){
 		client1_sd = accept(serverSocket,
 					(struct sockaddr* )&client1Address,
 				 	 &client1AddressLen);
-		cout<< client1_sd;
 		//pushing the client into the client vector
 		clientList.push_back(client1_sd);
 		sock.clientSocket = client1_sd;
@@ -118,24 +117,19 @@ void* GameServer::handleClient(void* socket) {
 		ss.clear();
 		ss << sock->clientSocket;
 		args.push_back(ss.str()); //every command needs the socket_id of the client
-		cout << "wait" << endl;
 		read(sock->clientSocket, buffer, sizeof(buffer));
-		cout << "read " << buffer << endl;
 		//tokenizing the string
 		token = strtok(buffer, " ");
-		cout << token << endl;
 		//command = the first token in buffer which is the command itself.
 		command = token;
 		token = strtok(NULL, " ");
 		while(token){
 			//strtok loop, iterating over input
 			args.push_back(token);
-			cout << token << endl;
 			token = strtok(NULL, " ");
 		}
 		//execute the command
 		chooseMoreCommands = com.executeCommand(command, args);
-		cout << chooseMoreCommands << endl;
 		args.clear();
 	}
 	return NULL;

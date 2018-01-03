@@ -8,6 +8,7 @@
 #ifndef ROOMCOMMAND_H_
 #define ROOMCOMMAND_H_
 #include "Command.h"
+#include "Room.h"
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <unistd.h>
@@ -23,7 +24,7 @@ class RoomCommand : public Command {
 	 * Commands that revolve around setting up a game
 	 */
 public:
-	static vector <pair<string,int> > gameRooms;
+	static vector <Room> gameRooms;
 	//this vector will contain pairs of room names
 	//and the socket descriptors of the clients who created that game.
 	virtual bool execute(vector <string> args)=0;

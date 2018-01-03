@@ -8,4 +8,4 @@
 
 #include "RoomCommand.h"
 //Static variable definition
-vector <pair<string,int> > RoomCommand::gameRooms;
+vector <Room> RoomCommand::gameRooms;

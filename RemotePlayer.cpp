@@ -120,7 +120,6 @@ RemotePlayer::RemotePlayer(char* fileName, bool *first) :
 				read(clientSocket, buffer, BUFFER_SIZE_);
 			}
 			else cout << "A game with the same name already exists\n\n";
-			cout << buffer << endl;
 			break;
 		case 3:
 			cout << "Enter name of the game you want to join: ";
@@ -145,7 +144,6 @@ RemotePlayer::RemotePlayer(char* fileName, bool *first) :
 				this->first = true;
 			}
 			else cout << "No game with this name exists\n\n";;
-			cout << buffer << endl;
 			break;
 		default:
 			cout << "this was not supposed to happen\n\n";

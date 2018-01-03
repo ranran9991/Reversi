@@ -1,3 +1,3 @@
-Command.o: ../Command.cpp ../Command.h
+Command.d: ../Command.cpp ../Command.h
 
 ../Command.h:
