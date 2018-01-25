@@ -12,7 +12,20 @@ CPP_SRCS += \
 ../ListGamesCommand.cpp \
 ../RoomCommand.cpp \
 ../StartCommand.cpp \
+../Task.cpp \
+../ThreadPool.cpp \
 ../main.cpp 
+
+O_SRCS += \
+../Command.o \
+../CommandManager.o \
+../GameRoom.o \
+../GameServer.o \
+../JoinCommand.o \
+../ListGamesCommand.o \
+../RoomCommand.o \
+../StartCommand.o \
+../main.o 
 
 OBJS += \
 ./Command.o \
@@ -23,6 +36,8 @@ OBJS += \
 ./ListGamesCommand.o \
 ./RoomCommand.o \
 ./StartCommand.o \
+./Task.o \
+./ThreadPool.o \
 ./main.o 
 
 CPP_DEPS += \
@@ -34,6 +49,8 @@ CPP_DEPS += \
 ./ListGamesCommand.d \
 ./RoomCommand.d \
 ./StartCommand.d \
+./Task.d \
+./ThreadPool.d \
 ./main.d 
 
 

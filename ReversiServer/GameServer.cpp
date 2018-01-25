@@ -11,6 +11,8 @@
  */
 
 #include "GameServer.h"
+#include "ThreadPool.h"
+#include "Task.h"
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <unistd.h>
@@ -48,14 +50,12 @@ GameServer::GameServer(char* fileName): serverSocket(0){
 	config.close();
 }
 void GameServer::start(){
+	ThreadPool pool(MAX_CONNECTED_CLIENTS);
 	int client1_sd;
 	/*
 	 * Both of these variables are used to create a changing number of threads
 	 * Ill allocate a thread for each client
 	 */
-	vector<pthread_t *> threadList;
-	int threadIndex = 0;
-	pthread_t exitThread; //this thread is used to provide a way to close the server.
 	CommunicationSockets sock;
 	sock.serverSocket = serverSocket;
 	char buffer[1024];
@@ -65,9 +65,7 @@ void GameServer::start(){
 	/*
 	 * Creating thread that will listen to the exit command
 	 */
-	if(pthread_create(&exitThread, NULL, waitForExit, this )){
-		throw "Error opening thread";
-	}
+	pool.addTask(new Task(waitForExit, this));
 	//cleaning buffer
 	memset(&buffer[0], 0, sizeof(buffer));
 	//Creating the socket
@@ -91,7 +89,6 @@ void GameServer::start(){
 	listen(serverSocket, MAX_CONNECTED_CLIENTS);
 	//If a game has ended, start a new one
 	while(true){
-		threadList.push_back(new pthread_t);
 		//Accepting client
 		client1_sd = accept(serverSocket,
 					(struct sockaddr* )&client1Address,
@@ -99,10 +96,7 @@ void GameServer::start(){
 		//pushing the client into the client vector
 		clientList.push_back(client1_sd);
 		sock.clientSocket = client1_sd;
-		if(pthread_create(threadList[threadIndex], NULL, handleClient, &sock)){
-			throw "Error opening thread";
-		}
-		threadIndex++;
+		pool.addTask(new Task(handleClient, &sock));
 	}
 }
 

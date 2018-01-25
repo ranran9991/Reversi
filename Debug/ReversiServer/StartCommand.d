@@ -1,6 +1,6 @@
 ReversiServer/StartCommand.d: ../ReversiServer/StartCommand.cpp \
  ../ReversiServer/StartCommand.h ../ReversiServer/RoomCommand.h \
- ../ReversiServer/Command.h ../ReversiServer/Room.h
+ ../ReversiServer/Command.h ../ReversiServer/GameRoom.h
 
 ../ReversiServer/StartCommand.h:
 
@@ -8,4 +8,4 @@ ReversiServer/StartCommand.d: ../ReversiServer/StartCommand.cpp \
 
 ../ReversiServer/Command.h:
 
-../ReversiServer/Room.h:
+../ReversiServer/GameRoom.h:

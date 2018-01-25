@@ -1,6 +1,6 @@
 ReversiServer/ListGamesCommand.d: ../ReversiServer/ListGamesCommand.cpp \
  ../ReversiServer/ListGamesCommand.h ../ReversiServer/RoomCommand.h \
- ../ReversiServer/Command.h ../ReversiServer/Room.h
+ ../ReversiServer/Command.h ../ReversiServer/GameRoom.h
 
 ../ReversiServer/ListGamesCommand.h:
 
@@ -8,4 +8,4 @@ ReversiServer/ListGamesCommand.d: ../ReversiServer/ListGamesCommand.cpp \
 
 ../ReversiServer/Command.h:
 
-../ReversiServer/Room.h:
+../ReversiServer/GameRoom.h:

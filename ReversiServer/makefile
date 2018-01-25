@@ -1,10 +1,10 @@
-a.out: main.o GameServer.o CommandManager.o Command.o RoomCommand.o JoinCommand.o ListGamesCommand.o StartCommand.o GameRoom.o
-	g++ -pthread -o ReversiServer main.o GameServer.o CommandManager.o Command.o RoomCommand.o JoinCommand.o ListGamesCommand.o  StartCommand.o GameRoom.o
+a.out: main.o GameServer.o CommandManager.o Command.o RoomCommand.o JoinCommand.o ListGamesCommand.o StartCommand.o GameRoom.o Task.o ThreadPool.o
+	g++ -pthread -o ReversiServer main.o GameServer.o CommandManager.o Command.o RoomCommand.o JoinCommand.o ListGamesCommand.o  StartCommand.o GameRoom.o Task.o ThreadPool.o
 
 main.o: main.cpp GameServer.h
 	g++ -c main.cpp
 
-GameServer.o: GameServer.cpp GameServer.h 
+GameServer.o: GameServer.cpp GameServer.h Task.h ThreadPool.h
 	g++ -c GameServer.cpp
 
 CommandManager.o: CommandManager.cpp CommandManager.h
@@ -27,3 +27,9 @@ StartCommand.o: StartCommand.cpp StartCommand.h
 
 GameRoom.o: GameRoom.cpp GameRoom.h
 	g++ -c GameRoom.cpp
+
+Task.o: Task.cpp Task.h
+	g++ -c Task.cpp
+
+ThreadPool.o: ThreadPool.cpp ThreadPool.h
+	g++ -c ThreadPool.cpp

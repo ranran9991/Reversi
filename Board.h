@@ -12,7 +12,7 @@
 
 #ifndef BOARD_H_
 #define BOARD_H_
-#define DEFAULT_SIZE_ 3
+#define DEFAULT_SIZE_ 8
 #include <iostream>
 #include <vector>
 using namespace std;
