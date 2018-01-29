@@ -1,8 +1,0 @@
-The main focus we had when merging both of our project was taking the best parts of both of our projects and combining in to one that would preserve both of our projects "Ideology".
-
-We decided to make Rons project the base as it was shorter and more well written. 
-We then added parts of Rans project that were better:
-- Add vector support for possible moves in the Board class.
-- Make Board a normal class and not a singelton (Later we will make it abstract like in Rans project).
-
-
